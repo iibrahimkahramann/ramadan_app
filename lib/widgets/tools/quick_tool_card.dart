@@ -49,7 +49,6 @@ class QuickToolCard extends StatelessWidget {
                   tool.iconPath,
                   width: screenWidth * 0.06,
                   height: screenWidth * 0.06,
-                  color: tool.iconColor,
                   errorBuilder: (context, error, stackTrace) => Icon(
                     Icons.category,
                     color: tool.iconColor,

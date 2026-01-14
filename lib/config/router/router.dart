@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ramadan_app/config/bar/custom_nav_bar.dart';
 import 'package:ramadan_app/views/home/home_view.dart';
+import 'package:ramadan_app/views/qibla_finder/qibla_finder_view.dart';
 import 'package:ramadan_app/views/settings/settings_view.dart';
 import 'package:ramadan_app/views/splash/splash_view.dart';
 export 'package:go_router/go_router.dart' show GoRouter;
@@ -52,40 +53,37 @@ final router = GoRouter(
           path: '/settings',
           pageBuilder: (context, state) =>
               const NoTransitionPage(child: SettingsView()),
-        ),
-        GoRoute(
-          path: '/qibla',
-          pageBuilder: (context, state) => const NoTransitionPage(
-            child: Scaffold(
-              body: Center(child: Text("Qibla Finder - Coming Soon")),
-            ),
-          ),
-        ),
-        GoRoute(
-          path: '/zikirmatik',
-          pageBuilder: (context, state) => const NoTransitionPage(
-            child: Scaffold(
-              body: Center(child: Text("Smart Zikirmatik - Coming Soon")),
-            ),
-          ),
-        ),
-        GoRoute(
-          path: '/hydration',
-          pageBuilder: (context, state) => const NoTransitionPage(
-            child: Scaffold(
-              body: Center(child: Text("Hydration Tracker - Coming Soon")),
-            ),
-          ),
-        ),
-        GoRoute(
-          path: '/mosques',
-          pageBuilder: (context, state) => const NoTransitionPage(
-            child: Scaffold(
-              body: Center(child: Text("Nearby Mosques - Coming Soon")),
-            ),
-          ),
-        ),
+        ), // End of Settings Route
       ],
+    ),
+    GoRoute(
+      path: '/qibla',
+      pageBuilder: (context, state) =>
+          const NoTransitionPage(child: QiblaFinderView()),
+    ),
+    GoRoute(
+      path: '/zikirmatik',
+      pageBuilder: (context, state) => const NoTransitionPage(
+        child: Scaffold(
+          body: Center(child: Text("Smart Zikirmatik - Coming Soon")),
+        ),
+      ),
+    ),
+    GoRoute(
+      path: '/hydration',
+      pageBuilder: (context, state) => const NoTransitionPage(
+        child: Scaffold(
+          body: Center(child: Text("Hydration Tracker - Coming Soon")),
+        ),
+      ),
+    ),
+    GoRoute(
+      path: '/mosques',
+      pageBuilder: (context, state) => const NoTransitionPage(
+        child: Scaffold(
+          body: Center(child: Text("Nearby Mosques - Coming Soon")),
+        ),
+      ),
     ),
   ],
 );
