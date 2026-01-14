@@ -11,6 +11,7 @@ final quickToolsProvider = Provider<List<QuickTool>>((ref) {
       iconPath: 'assets/icons/compass.png',
       iconColor: const Color(0xFFE67E22),
       backgroundColor: const Color(0xFFFFF4E8),
+      routePath: '/qibla',
     ),
     QuickTool(
       id: 'zikirmatik',
@@ -19,6 +20,7 @@ final quickToolsProvider = Provider<List<QuickTool>>((ref) {
       iconPath: 'assets/icons/fingerprint.png',
       iconColor: const Color(0xFF2F7F33),
       backgroundColor: const Color(0xFFE8F5E9),
+      routePath: '/zikirmatik',
     ),
     QuickTool(
       id: 'hydration',
@@ -28,6 +30,7 @@ final quickToolsProvider = Provider<List<QuickTool>>((ref) {
       iconColor: Colors.blue,
       backgroundColor: const Color(0xFFE3F2FD),
       badgeText: '3/8',
+      routePath: '/hydration',
     ),
     QuickTool(
       id: 'mosques',
@@ -36,6 +39,7 @@ final quickToolsProvider = Provider<List<QuickTool>>((ref) {
       iconPath: 'assets/icons/mosque.png',
       iconColor: Colors.purple,
       backgroundColor: const Color(0xFFF3E5F5),
+      routePath: '/mosques',
     ),
   ];
 });

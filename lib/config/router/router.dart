@@ -53,6 +53,38 @@ final router = GoRouter(
           pageBuilder: (context, state) =>
               const NoTransitionPage(child: SettingsView()),
         ),
+        GoRoute(
+          path: '/qibla',
+          pageBuilder: (context, state) => const NoTransitionPage(
+            child: Scaffold(
+              body: Center(child: Text("Qibla Finder - Coming Soon")),
+            ),
+          ),
+        ),
+        GoRoute(
+          path: '/zikirmatik',
+          pageBuilder: (context, state) => const NoTransitionPage(
+            child: Scaffold(
+              body: Center(child: Text("Smart Zikirmatik - Coming Soon")),
+            ),
+          ),
+        ),
+        GoRoute(
+          path: '/hydration',
+          pageBuilder: (context, state) => const NoTransitionPage(
+            child: Scaffold(
+              body: Center(child: Text("Hydration Tracker - Coming Soon")),
+            ),
+          ),
+        ),
+        GoRoute(
+          path: '/mosques',
+          pageBuilder: (context, state) => const NoTransitionPage(
+            child: Scaffold(
+              body: Center(child: Text("Nearby Mosques - Coming Soon")),
+            ),
+          ),
+        ),
       ],
     ),
   ],

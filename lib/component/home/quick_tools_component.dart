@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
 import 'package:ramadan_app/providers/tools/quick_tools_provider.dart';
@@ -40,10 +41,16 @@ class QuickToolsComponent extends ConsumerWidget {
           ),
           itemCount: quickTools.length,
           itemBuilder: (context, index) {
-            return QuickToolCard(
-              tool: quickTools[index],
-              screenHeight: screenHeight,
-              screenWidth: screenWidth,
+            final tool = quickTools[index];
+            return GestureDetector(
+              onTap: () {
+                context.push(tool.routePath);
+              },
+              child: QuickToolCard(
+                tool: tool,
+                screenHeight: screenHeight,
+                screenWidth: screenWidth,
+              ),
             );
           },
         ),

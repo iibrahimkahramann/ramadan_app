@@ -7,6 +7,7 @@ class QuickTool {
   final String iconPath;
   final Color iconColor;
   final Color backgroundColor;
+  final String routePath;
   final String? badgeText;
 
   QuickTool({
@@ -16,6 +17,7 @@ class QuickTool {
     required this.iconPath,
     required this.iconColor,
     required this.backgroundColor,
+    required this.routePath,
     this.badgeText,
   });
 }
