@@ -17,7 +17,7 @@ final quickToolsProvider = Provider<List<QuickTool>>((ref) {
       id: 'zikirmatik',
       title: 'Smart Zikirmatik',
       subtitle: 'Daily Dhikr',
-      iconPath: 'assets/icons/mosque.png',
+      iconPath: 'assets/icons/dhikr.png',
       iconColor: const Color(0xFF2F7F33),
       backgroundColor: const Color(0xFFE8F5E9),
       routePath: '/zikirmatik',

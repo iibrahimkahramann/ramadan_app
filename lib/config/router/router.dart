@@ -5,6 +5,7 @@ import 'package:ramadan_app/views/home/home_view.dart';
 import 'package:ramadan_app/views/qibla_finder/qibla_finder_view.dart';
 import 'package:ramadan_app/views/settings/settings_view.dart';
 import 'package:ramadan_app/views/splash/splash_view.dart';
+import 'package:ramadan_app/views/dhikr/dhikr_view.dart';
 export 'package:go_router/go_router.dart' show GoRouter;
 export 'package:flutter/material.dart' show GlobalKey, NavigatorState;
 
@@ -63,11 +64,8 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/zikirmatik',
-      pageBuilder: (context, state) => const NoTransitionPage(
-        child: Scaffold(
-          body: Center(child: Text("Smart Zikirmatik - Coming Soon")),
-        ),
-      ),
+      pageBuilder: (context, state) =>
+          const NoTransitionPage(child: DhikrView()),
     ),
     GoRoute(
       path: '/hydration',

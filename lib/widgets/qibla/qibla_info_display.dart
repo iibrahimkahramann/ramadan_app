@@ -13,8 +13,9 @@ class QiblaInfoDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(screenHeight * 0.015),
       decoration: BoxDecoration(
         color: const Color(0xFFF8F9FA),
         borderRadius: BorderRadius.circular(16),
@@ -27,19 +28,30 @@ class QiblaInfoDisplay extends StatelessWidget {
             context,
             'Qibla Angle',
             '${qiblaDirection.toStringAsFixed(1)}°',
+            screenHeight,
           ),
-          Container(height: 40, width: 1, color: Colors.grey.shade300),
+          Container(
+            height: screenHeight * 0.015,
+            width: 1,
+            color: Colors.grey.shade300,
+          ),
           _buildInfoItem(
             context,
             'Current Heading',
             '${heading.toStringAsFixed(1)}°',
+            screenHeight,
           ),
         ],
       ),
     );
   }
 
-  Widget _buildInfoItem(BuildContext context, String label, String value) {
+  Widget _buildInfoItem(
+    BuildContext context,
+    String label,
+    String value,
+    double screenHeight,
+  ) {
     return Column(
       children: [
         Text(
@@ -48,12 +60,11 @@ class QiblaInfoDisplay extends StatelessWidget {
             context,
           ).bodySmall?.copyWith(color: Colors.grey.shade600),
         ),
-        const SizedBox(height: 4),
+        SizedBox(height: screenHeight * 0.01),
         Text(
           value,
           style: CustomTheme.textTheme(context).bodyLarge?.copyWith(
             fontWeight: FontWeight.bold,
-            fontSize: 18,
             color: CustomTheme.primaryColor,
           ),
         ),
