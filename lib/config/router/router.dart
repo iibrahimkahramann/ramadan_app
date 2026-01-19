@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ramadan_app/config/bar/custom_nav_bar.dart';
 import 'package:ramadan_app/views/home/home_view.dart';
 import 'package:ramadan_app/views/qibla_finder/qibla_finder_view.dart';
+import 'package:ramadan_app/views/ramadan_calendar/ramadan_calendar_view.dart';
 import 'package:ramadan_app/views/settings/settings_view.dart';
 import 'package:ramadan_app/views/splash/splash_view.dart';
 import 'package:ramadan_app/views/dhikr/dhikr_view.dart';
@@ -68,20 +69,9 @@ final router = GoRouter(
           const NoTransitionPage(child: DhikrView()),
     ),
     GoRoute(
-      path: '/hydration',
-      pageBuilder: (context, state) => const NoTransitionPage(
-        child: Scaffold(
-          body: Center(child: Text("Hydration Tracker - Coming Soon")),
-        ),
-      ),
-    ),
-    GoRoute(
-      path: '/mosques',
-      pageBuilder: (context, state) => const NoTransitionPage(
-        child: Scaffold(
-          body: Center(child: Text("Nearby Mosques - Coming Soon")),
-        ),
-      ),
+      path: '/ramadan-calendar',
+      pageBuilder: (context, state) =>
+          const NoTransitionPage(child: RamadanCalendarView()),
     ),
   ],
 );

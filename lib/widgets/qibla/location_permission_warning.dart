@@ -8,8 +8,9 @@ class LocationPermissionWarning extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding: EdgeInsets.all(size.width * 0.05),
       child: Column(
         children: [
           const Icon(Icons.location_disabled, size: 50, color: Colors.orange),
