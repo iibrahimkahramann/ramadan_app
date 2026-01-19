@@ -61,10 +61,9 @@ class PrayerStepCard extends StatelessWidget {
               color: CustomTheme.backgroundColor,
               shape: BoxShape.circle,
             ),
-            child: Icon(
-              step.icon,
-              size: size.width * 0.2,
-              color: CustomTheme.primaryColor,
+            child: Padding(
+              padding: EdgeInsets.all(size.width * 0.02),
+              child: Image.asset(step.assetPath, fit: BoxFit.contain),
             ),
           ),
           SizedBox(height: size.height * 0.05),

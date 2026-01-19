@@ -21,48 +21,48 @@ class _PrayerViewState extends ConsumerState<PrayerView> {
       title: 'Niyyah (Intention)',
       description:
           'Stand facing the Qiblah. Make the intention in your heart to perform the specific prayer.',
-      icon: Icons.accessibility_new_rounded,
+      assetPath: 'assets/icons/niyyah.png',
     ),
     PrayerStep(
       title: 'Takbir',
       description:
           'Raise your hands to your ears and say "Allahu Akbar" (God is the Greatest). Lower your hands and place right hand over left on chest.',
-      icon: Icons.pan_tool_rounded,
+      assetPath: 'assets/icons/takbir.png',
     ),
     PrayerStep(
       title: 'Qiyam & Recitation',
       description:
           'Stand with respect. Recite Surah Al-Fatiha and another short Surah/verses from the Quran.',
-      icon: Icons.boy_rounded,
+      assetPath: 'assets/icons/qiyam.png',
     ),
     PrayerStep(
       title: 'Ruku (Bowing)',
       description:
           'Say "Allahu Akbar" and bow down used hands on knees. Keep back straight. Say "Subhana Rabbiyal Azeem" 3 times.',
-      icon: Icons.trending_down_rounded,
+      assetPath: 'assets/icons/ruku.png',
     ),
     PrayerStep(
       title: 'Qa/uma (Rising)',
       description:
           'Rise back to standing saying "Sami Allahu Liman Hamidah". Then say "Rabbana Lakal Hamd".',
-      icon: Icons.accessibility_rounded,
+      assetPath: 'assets/icons/qiyam.png',
     ),
     PrayerStep(
       title: 'Sujud (Prostration)',
       description:
           'Go down to the floor saying "Allahu Akbar". Forehead, nose, palms, knees, and toes should touch the ground. Say "Subhana Rabbiyal A/la" 3 times.',
-      icon: Icons.touch_app_rounded,
+      assetPath: 'assets/icons/sujud.png',
     ),
     PrayerStep(
       title: 'Tashahhud (Sitting)',
       description: 'Sit on your knees. Recite the Tashahhud, Salawat, and Dua.',
-      icon: Icons.event_seat_rounded,
+      assetPath: 'assets/icons/tashahhud.png',
     ),
     PrayerStep(
       title: 'Taslim (Salam)',
       description:
           'Turn your head to the right saying "Assalamu Alaikum wa Rahmatullah", then to the left.',
-      icon: Icons.check_circle_outline_rounded,
+      assetPath: 'assets/icons/salam.png',
     ),
   ];
 

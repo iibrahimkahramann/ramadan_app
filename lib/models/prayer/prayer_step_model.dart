@@ -1,13 +1,11 @@
-import 'package:flutter/material.dart';
-
 class PrayerStep {
   final String title;
   final String description;
-  final IconData icon;
+  final String assetPath;
 
   PrayerStep({
     required this.title,
     required this.description,
-    required this.icon,
+    required this.assetPath,
   });
 }
