@@ -32,13 +32,13 @@ final quickToolsProvider = Provider<List<QuickTool>>((ref) {
       routePath: '/ramadan-calendar',
     ),
     QuickTool(
-      id: 'mosques',
-      title: 'Nearby Mosques',
-      subtitle: 'Find Jamia',
-      iconPath: 'assets/icons/mosque.png',
+      id: 'prayer',
+      title: 'Prayer',
+      subtitle: 'To prayer',
+      iconPath: 'assets/icons/pray.png',
       iconColor: Colors.purple,
       backgroundColor: const Color(0xFFF3E5F5),
-      routePath: '/mosques',
+      routePath: '/prayer',
     ),
   ];
 });
