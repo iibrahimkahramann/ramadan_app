@@ -2,6 +2,7 @@ import 'package:adhan/adhan.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:ramadan_app/services/notification_service.dart';
 
 class RamadanState {
   final List<PrayerTimes> days;
@@ -127,6 +128,13 @@ class RamadanNotifier extends Notifier<RamadanState> {
         hasPermission: true,
         location: position,
       );
+
+      // Schedule notifications for Today and Tomorrow
+      final notificationService = NotificationService();
+      await notificationService.schedulePrayerTimes([
+        todayPrayerTimes,
+        tomorrowPrayerTimes,
+      ]);
     } catch (e) {
       state = state.copyWith(isLoading: false, hasPermission: false);
     }

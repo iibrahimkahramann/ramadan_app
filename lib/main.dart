@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ramadan_app/services/notification_service.dart';
 import 'package:ramadan_app/config/router/router.dart' as app_router;
 import 'package:ramadan_app/config/theme/custom_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Notification Service
+  final notificationService = NotificationService();
+  await notificationService.initialize();
+  await notificationService.requestPermissions();
 
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
