@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ramadan_app/config/bar/custom_nav_bar.dart';
+import 'package:ramadan_app/views/hadis/hadis_view.dart';
 import 'package:ramadan_app/views/home/home_view.dart';
 import 'package:ramadan_app/views/prayer/prayer_view.dart';
 import 'package:ramadan_app/views/qibla_finder/qibla_finder_view.dart';
@@ -78,6 +79,11 @@ final router = GoRouter(
       path: '/prayer',
       pageBuilder: (context, state) =>
           const NoTransitionPage(child: PrayerView()),
+    ),
+    GoRoute(
+      path: '/hadis',
+      pageBuilder: (context, state) =>
+          const NoTransitionPage(child: HadisView()),
     ),
   ],
 );

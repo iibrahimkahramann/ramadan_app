@@ -1,7 +1,11 @@
+import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
+import 'package:ramadan_app/providers/ramadan/ramadan_provider.dart';
 
-class ImsakContainerComponent extends StatelessWidget {
+class ImsakContainerComponent extends ConsumerWidget {
   const ImsakContainerComponent({
     super.key,
     required this.screenHeight,
@@ -12,42 +16,22 @@ class ImsakContainerComponent extends StatelessWidget {
   final double screenWidth;
 
   @override
-  Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> dailySchedule = [
-      {
-        'date': '13 Ocak Pazartesi',
-        'times': [
-          {'name': 'İmsak', 'time': '04:12'},
-          {'name': 'Güneş', 'time': '05:45'},
-          {'name': 'Öğle', 'time': '12:30'},
-          {'name': 'İkindi', 'time': '15:15'},
-          {'name': 'Akşam', 'time': '17:55'},
-          {'name': 'Yatsı', 'time': '19:20'},
-        ],
-      },
-      {
-        'date': '14 Ocak Salı',
-        'times': [
-          {'name': 'İmsak', 'time': '04:13'},
-          {'name': 'Güneş', 'time': '05:46'},
-          {'name': 'Öğle', 'time': '12:31'},
-          {'name': 'İkindi', 'time': '15:16'},
-          {'name': 'Akşam', 'time': '17:56'},
-          {'name': 'Yatsı', 'time': '19:21'},
-        ],
-      },
-      {
-        'date': '15 Ocak Çarşamba',
-        'times': [
-          {'name': 'İmsak', 'time': '04:14'},
-          {'name': 'Güneş', 'time': '05:47'},
-          {'name': 'Öğle', 'time': '12:32'},
-          {'name': 'İkindi', 'time': '15:17'},
-          {'name': 'Akşam', 'time': '17:57'},
-          {'name': 'Yatsı', 'time': '19:22'},
-        ],
-      },
-    ];
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(ramadanProvider);
+    final dailySchedule = <Map<String, dynamic>>[];
+
+    if (state.todayPrayerTimes != null) {
+      dailySchedule.add(_buildDayMap(state.todayPrayerTimes!));
+    }
+    if (state.tomorrowPrayerTimes != null) {
+      dailySchedule.add(_buildDayMap(state.tomorrowPrayerTimes!));
+    }
+    // If no provider data yet (loading), dailySchedule is empty.
+    // We could show loading, but PageView handles empty gracefully or we show empty.
+
+    if (dailySchedule.isEmpty) {
+      return const SizedBox(); // Or a loading indicator
+    }
 
     // PageController with viewportFraction for visible side cards
     final PageController controller = PageController(viewportFraction: 0.95);
@@ -114,5 +98,36 @@ class ImsakContainerComponent extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Map<String, dynamic> _buildDayMap(PrayerTimes prayerTimes) {
+    final dateFormat = DateFormat('d MMMM EEEE'); // e.g. 13 January Monday
+    final timeFormat = DateFormat('HH:mm');
+
+    // Note: 'date' logic might fail if system locale isn't Turkish for names like "Ocak", "Pazartesi".
+    // Ideally we pass locale 'tr_TR' to DateFormat if intl default locale isn't set.
+    // Assuming user might want English or System default if not specified.
+    // For now using default system locale.
+
+    final dateToCheck = DateTime(
+      prayerTimes.dateComponents.year,
+      prayerTimes.dateComponents.month,
+      prayerTimes.dateComponents.day,
+    );
+
+    return {
+      'date': dateFormat.format(dateToCheck),
+      'times': [
+        {'name': 'İmsak', 'time': timeFormat.format(prayerTimes.fajr)},
+        {'name': 'Güneş', 'time': timeFormat.format(prayerTimes.sunrise)},
+        {'name': 'Öğle', 'time': timeFormat.format(prayerTimes.dhuhr)},
+        {'name': 'İkindi', 'time': timeFormat.format(prayerTimes.asr)},
+        {
+          'name': 'Akşam',
+          'time': timeFormat.format(prayerTimes.maghrib),
+        }, // Iftar
+        {'name': 'Yatsı', 'time': timeFormat.format(prayerTimes.isha)},
+      ],
+    };
   }
 }

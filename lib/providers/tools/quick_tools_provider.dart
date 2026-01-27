@@ -40,5 +40,14 @@ final quickToolsProvider = Provider<List<QuickTool>>((ref) {
       backgroundColor: const Color(0xFFF3E5F5),
       routePath: '/prayer',
     ),
+    QuickTool(
+      id: 'hadis',
+      title: 'Hadis',
+      subtitle: 'Hadis',
+      iconPath: 'assets/icons/hadis.png',
+      iconColor: Colors.purple,
+      backgroundColor: const Color(0xFFF3E5F5),
+      routePath: '/hadis',
+    ),
   ];
 });

@@ -1,22 +1,75 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../config/theme/custom_theme.dart';
+import '../../providers/ramadan/ramadan_provider.dart';
 
-class TimerDisplayWidget extends StatelessWidget {
-  final String hours;
-  final String minutes;
-  final String seconds;
+class TimerDisplayWidget extends ConsumerStatefulWidget {
+  const TimerDisplayWidget({super.key});
 
-  const TimerDisplayWidget({
-    super.key,
-    this.hours = '06',
-    this.minutes = '33',
-    this.seconds = '10',
-  });
+  @override
+  ConsumerState<TimerDisplayWidget> createState() => _TimerDisplayWidgetState();
+}
+
+class _TimerDisplayWidgetState extends ConsumerState<TimerDisplayWidget> {
+  Timer? _timer;
+  Duration _timeLeft = Duration.zero;
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      _calculateTimeLeft();
+    });
+    // Run immediately once
+    WidgetsBinding.instance.addPostFrameCallback((_) => _calculateTimeLeft());
+  }
+
+  void _calculateTimeLeft() {
+    final state = ref.read(ramadanProvider);
+    if (state.todayPrayerTimes == null) return;
+
+    final now = DateTime.now();
+    final todayMaghrib = state.todayPrayerTimes!.maghrib;
+
+    DateTime targetTime;
+
+    if (now.isBefore(todayMaghrib)) {
+      targetTime = todayMaghrib;
+    } else {
+      // If passed today's Maghrib, count down to tomorrow's Maghrib
+      targetTime =
+          state.tomorrowPrayerTimes?.maghrib ??
+          todayMaghrib.add(const Duration(days: 1));
+    }
+
+    final diff = targetTime.difference(now);
+
+    if (mounted) {
+      setState(() {
+        _timeLeft = diff.isNegative ? Duration.zero : diff;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
+
+    final hours = _timeLeft.inHours.toString().padLeft(2, '0');
+    final minutes = (_timeLeft.inMinutes % 60).toString().padLeft(2, '0');
+    final seconds = (_timeLeft.inSeconds % 60).toString().padLeft(2, '0');
 
     return Column(
       children: [
@@ -33,7 +86,7 @@ class TimerDisplayWidget extends StatelessWidget {
                     text: 'İftara ',
                     style: TextStyle(color: CustomTheme.primaryColor),
                   ),
-                  TextSpan(text: 'Ne Kadar Kaldı?'),
+                  const TextSpan(text: 'Ne Kadar Kaldı?'),
                 ],
               ),
             ),
@@ -89,6 +142,7 @@ class TimerDisplayWidget extends StatelessWidget {
         fontWeight: FontWeight.w300,
         color: Colors.black,
         letterSpacing: -2,
+        fontFeatures: const [FontFeature.tabularFigures()],
       ),
     );
   }
