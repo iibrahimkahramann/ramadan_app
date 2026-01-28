@@ -40,6 +40,8 @@
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+		<key>NSUserTrackingUsageDescription</key>
+	<string>This app uses tracking to provide a better user experience and personalized content.</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UISupportedInterfaceOrientations</key>

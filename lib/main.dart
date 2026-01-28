@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ramadan_app/config/utils/app_tracking.dart';
 import 'package:ramadan_app/services/notification_service.dart';
 import 'package:ramadan_app/config/router/router.dart' as app_router;
 import 'package:ramadan_app/config/theme/custom_theme.dart';
@@ -80,7 +83,7 @@ class MyAppState extends ConsumerState<MyApp> {
   void initState() {
     super.initState();
     // setupRevenueCatListener(ref);
-    // Platform.isIOS ? appTracking() : nottrack();
+    Platform.isIOS ? appTracking() : nottrack();
   }
 
   @override

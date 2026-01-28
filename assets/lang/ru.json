@@ -102,5 +102,7 @@
     "Tashahhud (Sitting)": "Ташаххуд (Сидение)",
     "Sit on your knees. Recite the Tashahhud, Salawat, and Dua.": "Сядьте на колени. Прочитайте Ташаххуд, Салават и Дуа.",
     "General": "Общее",
-    "Legal": "Юридическое"
+    "Legal": "Юридическое",
+    "Prayer Time": "Время намаза",
+    "It is time for {}": "Настало время {}"
 }

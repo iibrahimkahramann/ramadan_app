@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'dart:typed_data';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -152,8 +153,8 @@ class NotificationService {
       // V20.0.0 usage
       await flutterLocalNotificationsPlugin.zonedSchedule(
         id: id,
-        title: 'Prayer Time',
-        body: 'It is time for $prayerName',
+        title: 'Prayer Time'.tr(),
+        body: 'It is time for {}'.tr(args: [prayerName.toLowerCase().tr()]),
         scheduledDate: tz.TZDateTime.from(prayerTime, tz.local),
         notificationDetails: NotificationDetails(
           android: AndroidNotificationDetails(
@@ -180,8 +181,7 @@ class NotificationService {
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
         // REMOVED uiLocalNotificationDateInterpretation
         // uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-        matchDateTimeComponents:
-            DateTimeComponents.dateAndTime, // Added for completeness if needed
+        // matchDateTimeComponents: DateTimeComponents.dateAndTime,
       );
     } catch (e) {
       print('Error scheduling notification for $prayerName: $e');
