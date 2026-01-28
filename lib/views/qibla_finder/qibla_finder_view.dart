@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -32,7 +33,7 @@ class _QiblaFinderViewState extends ConsumerState<QiblaFinderView> {
           onPressed: () => context.pop(),
         ),
         title: Text(
-          'Qibla Finder',
+          'Qibla Finder'.tr(),
           style: CustomTheme.textTheme(context).bodyLarge?.copyWith(
             fontSize: size.width * 0.05,
             fontWeight: FontWeight.bold,
@@ -72,7 +73,8 @@ class _QiblaFinderViewState extends ConsumerState<QiblaFinderView> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
               child: Text(
-                'Rotate your phone until the mosque icon aligns with the top of the compass.',
+                'Rotate your phone until the mosque icon aligns with the top of the compass.'
+                    .tr(),
                 textAlign: TextAlign.center,
                 style: CustomTheme.textTheme(context).bodyMedium?.copyWith(
                   color: Colors.grey.shade600,

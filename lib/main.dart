@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ramadan_app/services/notification_service.dart';
@@ -7,7 +8,6 @@ import 'package:ramadan_app/config/theme/custom_theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Notification Service
   final notificationService = NotificationService();
   await notificationService.initialize();
   await notificationService.requestPermissions();
@@ -40,27 +40,30 @@ void main() async {
 
   // await _configureRcsdk();
 
-  // await EasyLocalization.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   runApp(
-    // EasyLocalization(
-    // supportedLocales: const [
-    // Locale('en', ''),
-    // Locale('tr', ''),
-    // Locale('fr', ''),
-    // Locale('it', ''),
-    // Locale('pt', ''),
-    // Locale('es', ''),
-    // Locale('de', ''),
-    // Locale('ru', ''),
-    // Locale('ko', ''),
-    // Locale('ja', ''),
-    // ],
-    // path: 'assets/lang',
-    // fallbackLocale: const Locale('en', ''),
-    // useOnlyLangCode: true,
-    // child:
-    ProviderScope(child: MyApp()),
-    // ),
+    EasyLocalization(
+      supportedLocales: const [
+        Locale('en', ''),
+        Locale('tr', ''),
+        Locale('fr', ''),
+        Locale('it', ''),
+        Locale('pt', ''),
+        Locale('es', ''),
+        Locale('de', ''),
+        Locale('ru', ''),
+        Locale('ar', ''),
+        Locale('id', ''),
+        Locale('ur', ''),
+        Locale('bn', ''),
+        Locale('hi', ''),
+        Locale('ms', ''),
+      ],
+      path: 'assets/lang',
+      fallbackLocale: const Locale('en', ''),
+      useOnlyLangCode: true,
+      child: ProviderScope(child: MyApp()),
+    ),
   );
 }
 
@@ -93,9 +96,9 @@ class MyAppState extends ConsumerState<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.themeData(context),
       routerConfig: app_router.router,
-      // localizationsDelegates: context.localizationDelegates,
-      // supportedLocales: context.supportedLocales,
-      // locale: context.locale,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
     );
   }
 

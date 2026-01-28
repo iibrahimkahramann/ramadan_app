@@ -42,8 +42,8 @@ final quickToolsProvider = Provider<List<QuickTool>>((ref) {
     ),
     QuickTool(
       id: 'hadis',
-      title: 'Hadis',
-      subtitle: 'Hadis',
+      title: 'Hadith',
+      subtitle: 'The Sayings of the Prophet Muhammad',
       iconPath: 'assets/icons/hadis.png',
       iconColor: Colors.purple,
       backgroundColor: const Color(0xFFF3E5F5),
@@ -52,7 +52,7 @@ final quickToolsProvider = Provider<List<QuickTool>>((ref) {
     QuickTool(
       id: 'ablution',
       title: 'Ablution',
-      subtitle: 'Ablution',
+      subtitle: 'How to Perform Ablution?',
       iconPath: 'assets/icons/ablution.png',
       iconColor: Colors.purple,
       backgroundColor: const Color(0xFFF3E5F5),

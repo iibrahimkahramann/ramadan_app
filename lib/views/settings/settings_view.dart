@@ -1,13 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ramadan_app/widgets/home/custom_header_background.dart';
-import 'package:ramadan_app/services/notification_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
 
-// Placeholder URLs - Update these with actual links provided by user
 const String kPrivacyUrl =
     'https://sites.google.com/view/ramadan-privacy-polic/ana-sayfa';
 const String kTermsUrl =
@@ -38,10 +37,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
   Future<void> _rateApp() async {
     if (await _inAppReview.isAvailable()) {
       _inAppReview.requestReview();
-    } else {
-      // Fallback to store link if needed, but in_app_review handles store logic mostly
-      // Or open store url directly
-    }
+    } else {}
   }
 
   Future<void> _shareApp() async {
@@ -62,28 +58,22 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
       body: SingleChildScrollView(
         child: Stack(
           children: [
-            // Background
             CustomHeaderBackground(height: bgHeight),
 
-            // Content
             SafeArea(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                 child: Column(
                   children: [
-                    // Header Title
                     SizedBox(height: screenHeight * 0.035),
-                    // PREMIUM BANNER
                     _buildPremiumBanner(context, screenWidth, screenHeight),
 
                     SizedBox(height: screenHeight * 0.03),
-
-                    // GENERAL SECTION
-                    _buildSectionHeader(context, 'Genel', screenWidth),
+                    _buildSectionHeader(context, 'General', screenWidth),
                     _buildSettingsTile(
                       context,
                       icon: Icons.star_rate_rounded,
-                      title: 'Uygulamayı Değerlendir',
+                      title: 'Rate App',
                       onTap: _rateApp,
                       screenWidth: screenWidth,
                       screenHeight: screenHeight,
@@ -91,7 +81,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     _buildSettingsTile(
                       context,
                       icon: Icons.share_rounded,
-                      title: 'Paylaş',
+                      title: 'Share',
                       onTap: _shareApp,
                       screenWidth: screenWidth,
                       screenHeight: screenHeight,
@@ -99,7 +89,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     _buildSettingsTile(
                       context,
                       icon: Icons.mail_outline_rounded,
-                      title: 'İletişim / Destek',
+                      title: 'Contact / Support',
                       onTap: () => _launchUrl(kContactEmail),
                       screenWidth: screenWidth,
                       screenHeight: screenHeight,
@@ -107,12 +97,11 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
 
                     SizedBox(height: screenHeight * 0.03),
 
-                    // LEGAL SECTION
-                    _buildSectionHeader(context, 'Yasal', screenWidth),
+                    _buildSectionHeader(context, 'Legal', screenWidth),
                     _buildSettingsTile(
                       context,
                       icon: Icons.privacy_tip_outlined,
-                      title: 'Gizlilik Politikası',
+                      title: 'Privacy Policy',
                       onTap: () => _launchUrl(kPrivacyUrl),
                       screenWidth: screenWidth,
                       screenHeight: screenHeight,
@@ -120,26 +109,26 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     _buildSettingsTile(
                       context,
                       icon: Icons.description_outlined,
-                      title: 'Kullanım Koşulları',
+                      title: 'Terms of Use',
                       onTap: () => _launchUrl(kTermsUrl),
                       screenWidth: screenWidth,
                       screenHeight: screenHeight,
                     ),
 
                     SizedBox(height: screenHeight * 0.05),
-                    // DEBUG / TEST
-                    TextButton(
-                      onPressed: () {
-                        NotificationService().testNotification();
-                      },
-                      child: Text(
-                        "Test Bildirim (Debug)",
-                        style: TextStyle(
-                          color: Colors.grey[400],
-                          fontSize: screenWidth * 0.03,
-                        ),
-                      ),
-                    ),
+
+                    // TextButton(
+                    //   onPressed: () {
+                    //     NotificationService().testNotification();
+                    //   },
+                    //   child: Text(
+                    //     "Test Bildirim (Debug)",
+                    //     style: TextStyle(
+                    //       color: Colors.grey[400],
+                    //       fontSize: screenWidth * 0.03,
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(height: screenHeight * 0.02),
                   ],
                 ),
@@ -221,7 +210,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Ramadan Premium',
+                              'Ramadan Premium'.tr(),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: screenWidth * 0.05,
@@ -237,7 +226,8 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                             ),
                             SizedBox(height: screenHeight * 0.005),
                             Text(
-                              'Reklamsız deneyim ve size özel içerikler.',
+                              'Ad-free experience and exclusive content for you.'
+                                  .tr(),
                               style: TextStyle(
                                 color: Colors.white.withValues(alpha: 0.9),
                                 fontSize: screenWidth * 0.035,
@@ -269,7 +259,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                         ),
                       ),
                       child: Text(
-                        'Hemen Yükselt',
+                        'Upgrade Now'.tr(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: screenWidth * 0.04,

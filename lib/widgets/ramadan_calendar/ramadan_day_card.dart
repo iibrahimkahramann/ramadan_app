@@ -1,4 +1,5 @@
 import 'package:adhan/adhan.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
@@ -20,7 +21,6 @@ class RamadanDayCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final dateFormatter = DateFormat('d MMM yyyy, EEEE');
     final timeFormatter = DateFormat('HH:mm');
-    // Construct DateTime from PrayerTimes.dateComponents
     final date = DateTime(
       prayerTimes.dateComponents.year,
       prayerTimes.dateComponents.month,
@@ -52,7 +52,6 @@ class RamadanDayCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // Header Row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -65,7 +64,7 @@ class RamadanDayCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      'Day $dayNumber',
+                      'Day $dayNumber'.tr(),
                       style: TextStyle(
                         color: CustomTheme.primaryColor,
                         fontWeight: FontWeight.bold,
@@ -92,8 +91,8 @@ class RamadanDayCard extends StatelessWidget {
                     color: CustomTheme.primaryColor,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Text(
-                    'Today',
+                  child: Text(
+                    'Today'.tr(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -110,38 +109,38 @@ class RamadanDayCard extends StatelessWidget {
             children: [
               _buildTimeItem(
                 context,
-                'Imsak',
+                'fajr'.tr(),
                 timeFormatter.format(prayerTimes.fajr),
               ),
               _buildDivider(),
               _buildTimeItem(
                 context,
-                'Sun',
+                'sunrise'.tr(),
                 timeFormatter.format(prayerTimes.sunrise),
               ),
               _buildDivider(),
               _buildTimeItem(
                 context,
-                'Dhuhr',
+                'dhuhr'.tr(),
                 timeFormatter.format(prayerTimes.dhuhr),
               ),
               _buildDivider(),
               _buildTimeItem(
                 context,
-                'Asr',
+                'asr'.tr(),
                 timeFormatter.format(prayerTimes.asr),
               ),
               _buildDivider(),
               _buildTimeItem(
                 context,
-                'Iftar',
+                'maghrib'.tr(),
                 timeFormatter.format(prayerTimes.maghrib),
                 isHighlight: true,
               ),
               _buildDivider(),
               _buildTimeItem(
                 context,
-                'Isha',
+                'isha'.tr(),
                 timeFormatter.format(prayerTimes.isha),
               ),
             ],

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -18,57 +19,66 @@ class _AblutionViewState extends ConsumerState<AblutionView> {
 
   final List<PrayerStep> _steps = [
     PrayerStep(
-      title: 'Niyyah (Intention)',
+      title: 'Niyyah (Intention)'.tr(),
       description:
-          'Make the intention in your heart to perform Wudu for the sake of Allah, then say "Bismillah" (In the name of Allah).',
+          'Make the intention in your heart to perform Wudu for the sake of Allah, then say "Bismillah" (In the name of Allah).'
+              .tr(),
       assetPath: 'assets/icons/niyyah.png',
     ),
     PrayerStep(
-      title: 'Washing Hands',
+      title: 'Washing Hands'.tr(),
       description:
-          'Wash your hands up to the wrists three times, ensuring water reaches between the fingers.',
+          'Wash your hands up to the wrists three times, ensuring water reaches between the fingers.'
+              .tr(),
       assetPath: 'assets/icons/ablution.png',
     ),
     PrayerStep(
-      title: 'Rinsing Mouth',
+      title: 'Rinsing Mouth'.tr(),
       description:
-          'Rinse your mouth with water three times, swirling it around to ensure it reaches all parts.',
+          'Rinse your mouth with water three times, swirling it around to ensure it reaches all parts.'
+              .tr(),
       assetPath: 'assets/icons/mouth.png',
     ),
     PrayerStep(
-      title: 'Rinsing Nose',
+      title: 'Rinsing Nose'.tr(),
       description:
-          'Sniff clean water into your nose and then blow it out, three times.',
+          'Sniff clean water into your nose and then blow it out, three times.'
+              .tr(),
       assetPath: 'assets/icons/nose.png',
     ),
     PrayerStep(
-      title: 'Washing Face',
+      title: 'Washing Face'.tr(),
       description:
-          'Wash your entire face three times, from the hairline to the chin and from ear to ear.',
+          'Wash your entire face three times, from the hairline to the chin and from ear to ear.'
+              .tr(),
       assetPath: 'assets/icons/face.png',
     ),
     PrayerStep(
-      title: 'Washing Arms',
+      title: 'Washing Arms'.tr(),
       description:
-          'Wash your arms up to and including the elbows three times, starting with the right arm then the left.',
+          'Wash your arms up to and including the elbows three times, starting with the right arm then the left.'
+              .tr(),
       assetPath: 'assets/icons/arms.png',
     ),
     PrayerStep(
-      title: 'Wiping Head',
+      title: 'Wiping Head'.tr(),
       description:
-          'Wipe your head with wet hands, starting from the forehead to the back of the neck and back to the forehead once.',
+          'Wipe your head with wet hands, starting from the forehead to the back of the neck and back to the forehead once.'
+              .tr(),
       assetPath: 'assets/icons/head.png',
     ),
     PrayerStep(
-      title: 'Wiping Ears',
+      title: 'Wiping Ears'.tr(),
       description:
-          'Wipe the inside of your ears with your index fingers and the back of your ears with your thumbs once.',
+          'Wipe the inside of your ears with your index fingers and the back of your ears with your thumbs once.'
+              .tr(),
       assetPath: 'assets/icons/ears.png',
     ),
     PrayerStep(
-      title: 'Washing Feet',
+      title: 'Washing Feet'.tr(),
       description:
-          'Wash your feet up to and including the ankles three times, starting with the right foot then the left. Ensure water reaches between toes.',
+          'Wash your feet up to and including the ankles three times, starting with the right foot then the left. Ensure water reaches between toes.'
+              .tr(),
       assetPath: 'assets/icons/feet.png',
     ),
   ];
@@ -81,7 +91,7 @@ class _AblutionViewState extends ConsumerState<AblutionView> {
       backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
         title: Text(
-          'Ablution (Wudu) Guide',
+          'Ablution (Wudu) Guide'.tr(),
           style: CustomTheme.textTheme(
             context,
           ).bodyLarge?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),

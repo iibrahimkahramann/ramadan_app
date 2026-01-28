@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
@@ -45,7 +46,7 @@ class CalendarHeader extends ConsumerWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'Ramazan 1447 / 2026',
+            'Ramazan 1447 / 2026'.tr(),
             style: TextStyle(
               fontSize: size.width * 0.04,
               color: Colors.grey.shade600,

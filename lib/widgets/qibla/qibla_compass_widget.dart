@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
 
@@ -45,7 +46,7 @@ class QiblaCompassWidget extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        'N',
+                        'N'.tr(),
                         style: TextStyle(
                           color: Colors.red,
                           fontWeight: FontWeight.bold,
@@ -60,7 +61,7 @@ class QiblaCompassWidget extends StatelessWidget {
                 Positioned(
                   bottom: screenWidth * 0.04,
                   child: Text(
-                    'S',
+                    'S'.tr(),
                     style: TextStyle(
                       color: Colors.black54,
                       fontWeight: FontWeight.bold,
@@ -71,7 +72,7 @@ class QiblaCompassWidget extends StatelessWidget {
                 Positioned(
                   right: screenWidth * 0.04,
                   child: Text(
-                    'E',
+                    'E'.tr(),
                     style: TextStyle(
                       color: Colors.black54,
                       fontWeight: FontWeight.bold,
@@ -82,7 +83,7 @@ class QiblaCompassWidget extends StatelessWidget {
                 Positioned(
                   left: screenWidth * 0.04,
                   child: Text(
-                    'W',
+                    'W'.tr(),
                     style: TextStyle(
                       color: Colors.black54,
                       fontWeight: FontWeight.bold,

@@ -42,7 +42,6 @@ class DhikrCounterWidget extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            // Progress Ring
             SizedBox(
               width: size,
               height: size,
@@ -53,7 +52,6 @@ class DhikrCounterWidget extends StatelessWidget {
                 color: CustomTheme.primaryColor,
               ),
             ),
-            // Inner Content
             Container(
               width: size * 0.85,
               height: size * 0.85,

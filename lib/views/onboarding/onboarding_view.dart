@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -126,13 +127,13 @@ class _OnboardingViewState extends ConsumerState<OnboardingView> {
   String _getButtonText() {
     switch (_currentPage) {
       case 0:
-        return 'Continue';
+        return 'Continue'.tr();
       case 1:
-        return 'Enable Location';
+        return 'Enable Location'.tr();
       case 2:
-        return 'Get Started';
+        return 'Get Started'.tr();
       default:
-        return 'Continue';
+        return 'Continue'.tr();
     }
   }
 
@@ -178,7 +179,7 @@ class _OnboardingViewState extends ConsumerState<OnboardingView> {
           ),
           SizedBox(height: size.height * 0.04),
           Text(
-            'Your Companion for a\nBlessed Ramadan',
+            'Your Companion for a\nBlessed Ramadan'.tr(),
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
               fontSize: size.width * 0.07,
@@ -189,7 +190,8 @@ class _OnboardingViewState extends ConsumerState<OnboardingView> {
           ),
           SizedBox(height: size.height * 0.02),
           Text(
-            'Track fasting times, discover nutritious Iftar recipes, and stay spiritually connected every day.',
+            'Track fasting times, discover nutritious Iftar recipes, and stay spiritually connected every day.'
+                .tr(),
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
               fontSize: size.width * 0.04,
@@ -211,7 +213,7 @@ class _OnboardingViewState extends ConsumerState<OnboardingView> {
         children: [
           SizedBox(height: size.height * 0.05),
           Text(
-            'Accurate Features',
+            'Accurate Features'.tr(),
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
               fontSize: size.width * 0.07,
@@ -223,19 +225,19 @@ class _OnboardingViewState extends ConsumerState<OnboardingView> {
           _buildFeatureCard(
             context,
             Icons.access_time_filled_rounded,
-            "Imsakiye & Prayer Times",
-            "Precise times calculated for your exact location.",
+            "Imsakiye & Prayer Times".tr(),
+            "Precise times calculated for your exact location.".tr(),
           ),
           SizedBox(height: size.height * 0.02),
           _buildFeatureCard(
             context,
             Icons.explore_rounded,
-            "Qibla Finder",
-            "Find the direction of Mecca instantly.",
+            "Qibla Finder".tr(),
+            "Find the direction of Mecca instantly.".tr(),
           ),
           SizedBox(height: size.height * 0.05),
           Text(
-            'Enable location to use these features.',
+            'Enable location to use these features.'.tr(),
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.grey.shade400,
@@ -256,7 +258,7 @@ class _OnboardingViewState extends ConsumerState<OnboardingView> {
         children: [
           SizedBox(height: size.height * 0.05),
           Text(
-            'Coming Soon',
+            'Coming Soon'.tr(),
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
               fontSize: size.width * 0.07,
@@ -269,29 +271,30 @@ class _OnboardingViewState extends ConsumerState<OnboardingView> {
           _buildFeatureCard(
             context,
             Icons.notifications_active_rounded,
-            "Prayer Times Alerts",
-            "Get timely reminders for Suhoor, Iftar, and every prayer time.",
+            "Prayer Times Alerts".tr(),
+            "Get timely reminders for Suhoor, Iftar, and every prayer time."
+                .tr(),
             isReady: true,
           ),
           SizedBox(height: size.height * 0.02),
           _buildFeatureCard(
             context,
             Icons.smart_toy_rounded,
-            "AI Ramadan Chef",
-            "Get personalized Iftar & Suhoor recipes from our AI Chef.",
+            "AI Ramadan Chef".tr(),
+            "Get personalized Iftar & Suhoor recipes from our AI Chef.".tr(),
             isComingSoon: true,
           ),
           SizedBox(height: size.height * 0.02),
           _buildFeatureCard(
             context,
             Icons.collections_bookmark_rounded,
-            "Community Events",
-            "Join local Ramadan events near you.",
+            "Community Events".tr(),
+            "Join local Ramadan events near you.".tr(),
             isComingSoon: true,
           ),
           SizedBox(height: size.height * 0.05),
           Text(
-            'Enable notifications to be the first to know.',
+            'Enable notifications to be the first to know.'.tr(),
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.grey.shade400,

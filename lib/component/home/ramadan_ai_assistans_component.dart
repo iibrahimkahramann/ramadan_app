@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
 
@@ -38,7 +39,7 @@ class RamadanAIAsistansComponent extends StatelessWidget {
                 ),
                 SizedBox(width: screenWidth * 0.015),
                 Text(
-                  "RAMADAN AI ASSISTANT",
+                  "RAMADAN AI ASSISTANT".tr(),
                   style: CustomTheme.textTheme(context).bodyMedium?.copyWith(
                     color: CustomTheme.primaryColor,
                     fontWeight: FontWeight.bold,
@@ -48,7 +49,7 @@ class RamadanAIAsistansComponent extends StatelessWidget {
             ),
             SizedBox(height: screenHeight * 0.005),
             Text(
-              'Plan your perfect Iftar',
+              'Plan your perfect Iftar'.tr(),
               style: CustomTheme.textTheme(
                 context,
               ).bodyLarge?.copyWith(fontSize: screenHeight * 0.025),
@@ -56,7 +57,8 @@ class RamadanAIAsistansComponent extends StatelessWidget {
             SizedBox(height: screenHeight * 0.005),
             Text(
               textAlign: TextAlign.left,
-              'Get personalized menus & invitation \ncards tailored for your guests.',
+              'Get personalized menus & invitation \ncards tailored for your guests.'
+                  .tr(),
               style: CustomTheme.textTheme(
                 context,
               ).bodyMedium?.copyWith(color: CustomTheme.primaryColor),
@@ -80,7 +82,7 @@ class RamadanAIAsistansComponent extends StatelessWidget {
                   ),
                   SizedBox(width: screenWidth * 0.02),
                   Text(
-                    'Ask AI Chef: What to Cook?',
+                    'Ask AI Chef: What to Cook?'.tr(),
                     style: CustomTheme.textTheme(context).bodyMedium?.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

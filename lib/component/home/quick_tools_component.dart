@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +24,7 @@ class QuickToolsComponent extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Quick Tools',
+          'Quick Tools'.tr(),
           style: CustomTheme.textTheme(context).bodyLarge?.copyWith(
             fontSize: screenHeight * 0.025,
             fontWeight: FontWeight.bold,

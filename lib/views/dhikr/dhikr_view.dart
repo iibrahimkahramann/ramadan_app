@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -30,7 +31,7 @@ class _DhikrViewState extends ConsumerState<DhikrView> {
           onPressed: () => context.pop(),
         ),
         title: Text(
-          'Smart Dhikr',
+          'Smart Dhikr'.tr(),
           style: CustomTheme.textTheme(context).bodyLarge?.copyWith(
             fontSize: size.width * 0.05,
             fontWeight: FontWeight.bold,
@@ -52,7 +53,6 @@ class _DhikrViewState extends ConsumerState<DhikrView> {
           children: [
             SizedBox(height: size.height * 0.03),
 
-            // Selector Bar
             DhikrSelectorBar(activeDhikr: activeDhikr),
 
             Expanded(
@@ -67,11 +67,10 @@ class _DhikrViewState extends ConsumerState<DhikrView> {
               ),
             ),
 
-            // Bottom Info
             Padding(
               padding: EdgeInsets.only(bottom: size.height * 0.05),
               child: Text(
-                'Tap circle to count',
+                'Tap circle to count'.tr(),
                 style: CustomTheme.textTheme(
                   context,
                 ).bodyMedium?.copyWith(color: Colors.grey.shade500),

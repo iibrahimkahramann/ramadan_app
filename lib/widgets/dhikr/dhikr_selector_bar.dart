@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
 import 'package:ramadan_app/models/dhikr/dhikr_model.dart';
@@ -65,8 +66,8 @@ class DhikrSelectorBar extends StatelessWidget {
                       activeDhikr.arabicTitle!,
                       style: CustomTheme.textTheme(context).bodySmall?.copyWith(
                         color: Colors.grey.shade600,
-                        fontFamily:
-                            'Amiri', // Assuming you might have arabic font, else default
+                        fontFamily: 'Amiri'
+                            .tr(), // Assuming you might have arabic font, else default
                       ),
                     ),
                 ],

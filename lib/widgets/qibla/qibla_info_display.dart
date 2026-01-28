@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
 
@@ -26,7 +27,7 @@ class QiblaInfoDisplay extends StatelessWidget {
         children: [
           _buildInfoItem(
             context,
-            'Qibla Angle',
+            'Qibla Angle'.tr(),
             '${qiblaDirection.toStringAsFixed(1)}°',
             screenHeight,
           ),
@@ -37,7 +38,7 @@ class QiblaInfoDisplay extends StatelessWidget {
           ),
           _buildInfoItem(
             context,
-            'Current Heading',
+            'Current Heading'.tr(),
             '${heading.toStringAsFixed(1)}°',
             screenHeight,
           ),

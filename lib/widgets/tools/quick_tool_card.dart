@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
 import 'package:ramadan_app/models/tools/quick_tool_model.dart';
@@ -60,14 +61,14 @@ class QuickToolCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    tool.title,
+                    tool.title.tr(),
                     style: CustomTheme.textTheme(context).bodyMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: screenHeight * 0.018,
                     ),
                   ),
                   Text(
-                    tool.subtitle,
+                    tool.subtitle.tr(),
                     style: CustomTheme.textTheme(context).bodySmall?.copyWith(
                       color: Colors.grey.shade600,
                       fontSize: screenHeight * 0.014,
@@ -91,7 +92,7 @@ class QuickToolCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
-                  tool.badgeText!,
+                  tool.badgeText!.tr(),
                   style: TextStyle(
                     color: Colors.blue.shade700,
                     fontWeight: FontWeight.bold,

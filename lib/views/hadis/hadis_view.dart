@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -18,7 +19,7 @@ class HadisView extends ConsumerWidget {
       backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
         title: Text(
-          'Daily Hadith (Bukhari)',
+          'Daily Hadith (Bukhari)'.tr(),
           style: CustomTheme.textTheme(context).bodyLarge?.copyWith(
             fontSize: screenHeight * 0.025,
             fontWeight: FontWeight.bold,

@@ -1,4 +1,5 @@
 import 'package:adhan/adhan.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -26,14 +27,10 @@ class ImsakContainerComponent extends ConsumerWidget {
     if (state.tomorrowPrayerTimes != null) {
       dailySchedule.add(_buildDayMap(state.tomorrowPrayerTimes!));
     }
-    // If no provider data yet (loading), dailySchedule is empty.
-    // We could show loading, but PageView handles empty gracefully or we show empty.
 
     if (dailySchedule.isEmpty) {
-      return const SizedBox(); // Or a loading indicator
+      return const SizedBox();
     }
-
-    // PageController with viewportFraction for visible side cards
     final PageController controller = PageController(viewportFraction: 0.95);
 
     return SizedBox(
@@ -104,11 +101,6 @@ class ImsakContainerComponent extends ConsumerWidget {
     final dateFormat = DateFormat('d MMMM EEEE'); // e.g. 13 January Monday
     final timeFormat = DateFormat('HH:mm');
 
-    // Note: 'date' logic might fail if system locale isn't Turkish for names like "Ocak", "Pazartesi".
-    // Ideally we pass locale 'tr_TR' to DateFormat if intl default locale isn't set.
-    // Assuming user might want English or System default if not specified.
-    // For now using default system locale.
-
     final dateToCheck = DateTime(
       prayerTimes.dateComponents.year,
       prayerTimes.dateComponents.month,
@@ -118,15 +110,18 @@ class ImsakContainerComponent extends ConsumerWidget {
     return {
       'date': dateFormat.format(dateToCheck),
       'times': [
-        {'name': 'İmsak', 'time': timeFormat.format(prayerTimes.fajr)},
-        {'name': 'Güneş', 'time': timeFormat.format(prayerTimes.sunrise)},
-        {'name': 'Öğle', 'time': timeFormat.format(prayerTimes.dhuhr)},
-        {'name': 'İkindi', 'time': timeFormat.format(prayerTimes.asr)},
+        {'name': 'fajr'.tr(), 'time': timeFormat.format(prayerTimes.fajr)},
         {
-          'name': 'Akşam',
+          'name': 'sunrise'.tr(),
+          'time': timeFormat.format(prayerTimes.sunrise),
+        },
+        {'name': 'dhuhr'.tr(), 'time': timeFormat.format(prayerTimes.dhuhr)},
+        {'name': 'asr'.tr(), 'time': timeFormat.format(prayerTimes.asr)},
+        {
+          'name': 'maghrib'.tr(),
           'time': timeFormat.format(prayerTimes.maghrib),
-        }, // Iftar
-        {'name': 'Yatsı', 'time': timeFormat.format(prayerTimes.isha)},
+        },
+        {'name': 'isha'.tr(), 'time': timeFormat.format(prayerTimes.isha)},
       ],
     };
   }

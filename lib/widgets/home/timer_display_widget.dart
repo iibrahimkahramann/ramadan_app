@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../config/theme/custom_theme.dart';
@@ -31,7 +32,6 @@ class _TimerDisplayWidgetState extends ConsumerState<TimerDisplayWidget> {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       _calculateTimeLeft();
     });
-    // Run immediately once
     WidgetsBinding.instance.addPostFrameCallback((_) => _calculateTimeLeft());
   }
 
@@ -47,7 +47,6 @@ class _TimerDisplayWidgetState extends ConsumerState<TimerDisplayWidget> {
     if (now.isBefore(todayMaghrib)) {
       targetTime = todayMaghrib;
     } else {
-      // If passed today's Maghrib, count down to tomorrow's Maghrib
       targetTime =
           state.tomorrowPrayerTimes?.maghrib ??
           todayMaghrib.add(const Duration(days: 1));
@@ -81,13 +80,7 @@ class _TimerDisplayWidgetState extends ConsumerState<TimerDisplayWidget> {
               textAlign: TextAlign.center,
               text: TextSpan(
                 style: CustomTheme.textTheme(context).headlineLarge,
-                children: [
-                  TextSpan(
-                    text: 'İftara ',
-                    style: TextStyle(color: CustomTheme.primaryColor),
-                  ),
-                  const TextSpan(text: 'Ne Kadar Kaldı?'),
-                ],
+                children: [TextSpan(text: 'How long until iftar?'.tr())],
               ),
             ),
           ),
@@ -115,11 +108,11 @@ class _TimerDisplayWidgetState extends ConsumerState<TimerDisplayWidget> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          _buildTimeLabel(context, 'saat', screenWidth),
+                          _buildTimeLabel(context, 'Hours'.tr(), screenWidth),
                           SizedBox(width: screenWidth * 0.05),
-                          _buildTimeLabel(context, 'dakika', screenWidth),
+                          _buildTimeLabel(context, 'Minutes'.tr(), screenWidth),
                           SizedBox(width: screenWidth * 0.05),
-                          _buildTimeLabel(context, 'saniye', screenWidth),
+                          _buildTimeLabel(context, 'Seconds'.tr(), screenWidth),
                         ],
                       ),
                     ],

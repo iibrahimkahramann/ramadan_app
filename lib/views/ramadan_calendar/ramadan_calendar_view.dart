@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -19,8 +20,6 @@ class _RamadanCalendarViewState extends ConsumerState<RamadanCalendarView> {
   @override
   void initState() {
     super.initState();
-    // Re-check permission logic when view initializes if needed,
-    // but provider handles it on build.
   }
 
   @override
@@ -32,7 +31,7 @@ class _RamadanCalendarViewState extends ConsumerState<RamadanCalendarView> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          'Ramadan Calendar',
+          'Ramadan Calendar'.tr(),
           style: CustomTheme.textTheme(
             context,
           ).bodyLarge?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
