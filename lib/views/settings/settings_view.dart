@@ -8,9 +8,11 @@ import 'package:share_plus/share_plus.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
 
 // Placeholder URLs - Update these with actual links provided by user
-const String kPrivacyUrl = 'https://www.google.com';
-const String kTermsUrl = 'https://www.google.com';
-const String kContactEmail = 'mailto:support@ramadanapp.com';
+const String kPrivacyUrl =
+    'https://sites.google.com/view/ramadan-privacy-polic/ana-sayfa';
+const String kTermsUrl =
+    'https://sites.google.com/view/ramadan-terms/ana-sayfa';
+const String kContactEmail = 'mailto:ramadanappsup@gmail.com';
 
 class SettingsView extends ConsumerStatefulWidget {
   const SettingsView({super.key});
@@ -43,6 +45,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
   }
 
   Future<void> _shareApp() async {
+    // ignore: deprecated_member_use
     await Share.share(
       'Check out this amazing Ramadan App! https://apps.apple.com/app/id...',
     );
@@ -51,81 +54,79 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     final bgHeight = screenHeight * 0.22;
-    final theme = Theme.of(context);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: Stack(
           children: [
-            // Background - Now inside scroll view, so it scrolls!
+            // Background
             CustomHeaderBackground(height: bgHeight),
 
             // Content
             SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Header Title
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: Text(
-                        'Ayarlar',
-                        style: theme.textTheme.headlineMedium?.copyWith(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-
+                    SizedBox(height: screenHeight * 0.035),
                     // PREMIUM BANNER
-                    _buildPremiumBanner(context),
+                    _buildPremiumBanner(context, screenWidth, screenHeight),
 
-                    const SizedBox(height: 24),
+                    SizedBox(height: screenHeight * 0.03),
 
                     // GENERAL SECTION
-                    _buildSectionHeader(context, 'Genel'),
+                    _buildSectionHeader(context, 'Genel', screenWidth),
                     _buildSettingsTile(
                       context,
                       icon: Icons.star_rate_rounded,
                       title: 'Uygulamayı Değerlendir',
                       onTap: _rateApp,
+                      screenWidth: screenWidth,
+                      screenHeight: screenHeight,
                     ),
                     _buildSettingsTile(
                       context,
                       icon: Icons.share_rounded,
                       title: 'Paylaş',
                       onTap: _shareApp,
+                      screenWidth: screenWidth,
+                      screenHeight: screenHeight,
                     ),
                     _buildSettingsTile(
                       context,
                       icon: Icons.mail_outline_rounded,
                       title: 'İletişim / Destek',
                       onTap: () => _launchUrl(kContactEmail),
+                      screenWidth: screenWidth,
+                      screenHeight: screenHeight,
                     ),
 
-                    const SizedBox(height: 24),
+                    SizedBox(height: screenHeight * 0.03),
 
                     // LEGAL SECTION
-                    _buildSectionHeader(context, 'Yasal'),
+                    _buildSectionHeader(context, 'Yasal', screenWidth),
                     _buildSettingsTile(
                       context,
                       icon: Icons.privacy_tip_outlined,
                       title: 'Gizlilik Politikası',
                       onTap: () => _launchUrl(kPrivacyUrl),
+                      screenWidth: screenWidth,
+                      screenHeight: screenHeight,
                     ),
                     _buildSettingsTile(
                       context,
                       icon: Icons.description_outlined,
                       title: 'Kullanım Koşulları',
                       onTap: () => _launchUrl(kTermsUrl),
+                      screenWidth: screenWidth,
+                      screenHeight: screenHeight,
                     ),
 
-                    const SizedBox(height: 40),
+                    SizedBox(height: screenHeight * 0.05),
                     // DEBUG / TEST
                     TextButton(
                       onPressed: () {
@@ -133,10 +134,13 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                       },
                       child: Text(
                         "Test Bildirim (Debug)",
-                        style: TextStyle(color: Colors.grey[400], fontSize: 12),
+                        style: TextStyle(
+                          color: Colors.grey[400],
+                          fontSize: screenWidth * 0.03,
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: screenHeight * 0.02),
                   ],
                 ),
               ),
@@ -147,96 +151,160 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
     );
   }
 
-  Widget _buildPremiumBanner(BuildContext context) {
+  Widget _buildPremiumBanner(
+    BuildContext context,
+    double screenWidth,
+    double screenHeight,
+  ) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [
-            Color(0xFFFFA726),
-            Color(0xFFFF7043),
-          ], // Orange/Amber gradient
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(screenWidth * 0.05),
         boxShadow: [
           BoxShadow(
-            color: Colors.orange.withOpacity(0.3),
+            color: Colors.black.withValues(alpha: 0.2),
             blurRadius: 15,
-            offset: const Offset(0, 8),
+            offset: Offset(0, 8),
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const Icon(
-                Icons.workspace_premium_rounded,
-                color: Colors.white,
-                size: 32,
-              ),
-              const SizedBox(width: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Premium\'a Geçin',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(screenWidth * 0.05),
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: Image.asset('assets/images/mosque.jpg', fit: BoxFit.cover),
+            ),
+
+            Positioned.fill(
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF000000).withValues(alpha: 0.85),
+                      Color(0xFF263238).withValues(alpha: 0.6),
+                    ],
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
                   ),
-                  Text(
-                    'Reklamsız ve Sınırsız Deneyim',
-                    style: TextStyle(color: Colors.white70, fontSize: 14),
+                ),
+              ),
+            ),
+
+            Padding(
+              padding: EdgeInsets.all(screenWidth * 0.05),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(screenWidth * 0.02),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.15),
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.amberAccent.withValues(alpha: 0.6),
+                            width: 1,
+                          ),
+                        ),
+                        child: Icon(
+                          Icons.workspace_premium_rounded,
+                          color: Colors.amberAccent,
+                          size: screenWidth * 0.08,
+                        ),
+                      ),
+                      SizedBox(width: screenWidth * 0.03),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Ramadan Premium',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: screenWidth * 0.05,
+                                fontWeight: FontWeight.bold,
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.black,
+                                    blurRadius: 10,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: screenHeight * 0.005),
+                            Text(
+                              'Reklamsız deneyim ve size özel içerikler.',
+                              style: TextStyle(
+                                color: Colors.white.withValues(alpha: 0.9),
+                                fontSize: screenWidth * 0.035,
+                                height: 1.2,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: screenHeight * 0.03),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.amberAccent,
+                        foregroundColor: Colors.black87,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                            screenWidth * 0.03,
+                          ),
+                        ),
+                        elevation: 4,
+                        shadowColor: Colors.amber.withValues(alpha: 0.4),
+                        padding: EdgeInsets.symmetric(
+                          vertical: screenHeight * 0.015,
+                        ),
+                      ),
+                      child: Text(
+                        'Hemen Yükselt',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: screenWidth * 0.04,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                // TODO: Trigger Purchase Flow
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: const Color(0xFFFF7043),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                elevation: 0,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-              ),
-              child: const Text(
-                'Hemen Yükselt',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildSectionHeader(BuildContext context, String title) {
+  Widget _buildSectionHeader(
+    BuildContext context,
+    String title,
+    double screenWidth,
+  ) {
     return Padding(
-      padding: const EdgeInsets.only(left: 4, bottom: 8),
+      padding: EdgeInsets.only(
+        left: screenWidth * 0.01,
+        bottom: screenWidth * 0.02,
+      ),
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
           title.toUpperCase(),
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
-            color: const Color(0xFF616161), // Explicit grey for visibility
+            color: Color(0xFF616161),
             letterSpacing: 1.2,
             fontWeight: FontWeight.bold,
+            fontSize: screenWidth * 0.03,
           ),
         ),
       ),
@@ -248,48 +316,57 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
     required IconData icon,
     required String title,
     required VoidCallback onTap,
+    required double screenWidth,
+    required double screenHeight,
   }) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: EdgeInsets.only(bottom: screenHeight * 0.015),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(screenWidth * 0.04),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.05),
+            color: Colors.grey.withValues(alpha: 0.05),
             blurRadius: 10,
-            offset: const Offset(0, 2),
+            offset: Offset(0, 2),
           ),
         ],
-        border: Border.all(color: Colors.grey.withOpacity(0.1)),
+        border: Border.all(color: Colors.grey.withValues(alpha: 0.1)),
       ),
       child: ListTile(
         leading: Container(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(screenWidth * 0.02),
           decoration: BoxDecoration(
-            color: CustomTheme.primaryColor.withOpacity(0.1),
+            color: CustomTheme.primaryColor.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
-          child: Icon(icon, color: CustomTheme.primaryColor, size: 20),
+          child: Icon(
+            icon,
+            color: CustomTheme.primaryColor,
+            size: screenWidth * 0.05,
+          ),
         ),
         title: Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.w600,
-            fontSize: 15,
-            color: Color(
-              0xFF212121,
-            ), // Explicit black (dark grey) for white background
+            fontSize: screenWidth * 0.038,
+            color: Color(0xFF212121),
           ),
         ),
-        trailing: const Icon(
+        trailing: Icon(
           Icons.chevron_right_rounded,
           color: Colors.grey,
-          size: 20,
+          size: screenWidth * 0.05,
         ),
         onTap: onTap,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(screenWidth * 0.04),
+        ),
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: screenWidth * 0.04,
+          vertical: screenHeight * 0.005,
+        ),
       ),
     );
   }

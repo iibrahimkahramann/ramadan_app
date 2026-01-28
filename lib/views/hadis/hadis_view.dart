@@ -130,6 +130,7 @@ class HadisView extends ConsumerWidget {
                           ),
                           IconButton(
                             onPressed: () {
+                              // ignore: deprecated_member_use
                               Share.share(
                                 '${hadith.text}\n\n${hadith.source} - Hadith #${hadith.number}\n\nShared via Ramadan App',
                               );

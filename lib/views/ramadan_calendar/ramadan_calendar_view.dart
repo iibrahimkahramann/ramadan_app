@@ -66,7 +66,7 @@ class _RamadanCalendarViewState extends ConsumerState<RamadanCalendarView> {
 
     return Column(
       children: [
-        CalendarHeader(location: state.location),
+        const CalendarHeader(),
         Expanded(
           child: ListView.builder(
             itemCount: state.days.length,

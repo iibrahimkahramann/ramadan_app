@@ -1,6 +1,7 @@
 import 'package:adhan/adhan.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:ramadan_app/services/notification_service.dart';
 
@@ -11,6 +12,7 @@ class RamadanState {
   final bool isLoading;
   final bool hasPermission;
   final Position? location;
+  final String? locationName;
 
   RamadanState({
     this.days = const [],
@@ -19,6 +21,7 @@ class RamadanState {
     this.isLoading = true,
     this.hasPermission = false,
     this.location,
+    this.locationName,
   });
 
   RamadanState copyWith({
@@ -28,6 +31,7 @@ class RamadanState {
     bool? isLoading,
     bool? hasPermission,
     Position? location,
+    String? locationName,
   }) {
     return RamadanState(
       days: days ?? this.days,
@@ -36,6 +40,7 @@ class RamadanState {
       isLoading: isLoading ?? this.isLoading,
       hasPermission: hasPermission ?? this.hasPermission,
       location: location ?? this.location,
+      locationName: locationName ?? this.locationName,
     );
   }
 }
@@ -68,6 +73,32 @@ class RamadanNotifier extends Notifier<RamadanState> {
     try {
       final position = await Geolocator.getCurrentPosition();
 
+      // Reverse Geocoding to get District/City
+      String? locationName;
+      try {
+        final placemarks = await placemarkFromCoordinates(
+          position.latitude,
+          position.longitude,
+        );
+        if (placemarks.isNotEmpty) {
+          final place = placemarks.first;
+          // Prioritize District (subAdministrativeArea) -> City (locality) -> Province (administrativeArea)
+          locationName =
+              place.subAdministrativeArea ??
+              place.locality ??
+              place.administrativeArea;
+
+          // Append City if we have a district (e.g. "İnegöl, Bursa") for clarity
+          if (place.subAdministrativeArea != null &&
+              place.administrativeArea != null) {
+            locationName =
+                '${place.subAdministrativeArea}, ${place.administrativeArea}';
+          }
+        }
+      } catch (_) {
+        locationName = "Konum Bulunamadı";
+      }
+
       // Check if we are detecting the default iOS Simulator location (San Francisco)
       // SF: ~37.7858° N, 122.4064° W
       // If detected, switch to Istanbul to avoid timezone confusion during development in Turkey.
@@ -79,6 +110,7 @@ class RamadanNotifier extends Notifier<RamadanState> {
       if (isSimulatorDefault) {
         // Force Istanbul
         coordinates = Coordinates(41.0082, 28.9784);
+        locationName = "İstanbul (Simülatör)";
       } else {
         coordinates = Coordinates(position.latitude, position.longitude);
       }
@@ -127,6 +159,7 @@ class RamadanNotifier extends Notifier<RamadanState> {
         isLoading: false,
         hasPermission: true,
         location: position,
+        locationName: locationName,
       );
 
       // Schedule notifications for Today and Tomorrow
