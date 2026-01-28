@@ -25,7 +25,7 @@ class _OnboardingViewState extends ConsumerState<OnboardingView> {
     final Color primaryGreen = const Color(0xFF00C853);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF121212),
+      backgroundColor: Color.fromARGB(255, 4, 21, 104),
       body: Stack(
         children: [
           Positioned.fill(
@@ -44,8 +44,8 @@ class _OnboardingViewState extends ConsumerState<OnboardingView> {
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.transparent,
-                    Colors.black.withValues(alpha: 0.8),
-                    const Color(0xFF121212),
+                    Color.fromARGB(255, 4, 21, 104).withValues(alpha: 0.9),
+                    Color.fromARGB(255, 4, 21, 104),
                   ],
                   stops: const [0.3, 0.55, 1.0],
                 ),

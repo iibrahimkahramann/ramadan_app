@@ -25,7 +25,7 @@ class CustomTheme {
 
   //gredient
   static const Color gradientStart = Color(0xFF00C853);
-  static const Color gradientEnd = Color.fromARGB(255, 2, 188, 79);
+  static const Color gradientEnd = Color(0xFF00C853);
   static const LinearGradient primaryGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,

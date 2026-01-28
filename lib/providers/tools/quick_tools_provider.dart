@@ -10,7 +10,7 @@ final quickToolsProvider = Provider<List<QuickTool>>((ref) {
       subtitle: 'Locate direction',
       iconPath: 'assets/icons/mosque.png',
       iconColor: Colors.purple,
-      backgroundColor: const Color(0xFFFFF4E8),
+      backgroundColor: Color.fromRGBO(230, 234, 253, 1),
       routePath: '/qibla',
     ),
     QuickTool(
