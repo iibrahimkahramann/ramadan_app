@@ -11,7 +11,7 @@ class CustomTheme {
     );
   }
 
-  static const Color primaryColor = Color(0xFF2F7F33);
+  static const Color primaryColor = Color(0xFF00C853);
   static const Color secondaryColor = Color.fromARGB(255, 28, 28, 29);
   static const Color accentColor = Colors.white;
   static const Color accentColor2 = Color.fromARGB(118, 192, 224, 252);
@@ -24,8 +24,8 @@ class CustomTheme {
   static const Color containerColor = Color.fromARGB(255, 58, 73, 249);
 
   //gredient
-  static const Color gradientStart = Color(0xFF2F7F33);
-  static const Color gradientEnd = Color.fromARGB(255, 144, 79, 23);
+  static const Color gradientStart = Color(0xFF00C853);
+  static const Color gradientEnd = Color.fromARGB(255, 2, 188, 79);
   static const LinearGradient primaryGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,

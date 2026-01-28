@@ -10,6 +10,7 @@ import 'package:ramadan_app/views/ramadan_calendar/ramadan_calendar_view.dart';
 import 'package:ramadan_app/views/settings/settings_view.dart';
 import 'package:ramadan_app/views/splash/splash_view.dart';
 import 'package:ramadan_app/views/dhikr/dhikr_view.dart';
+import 'package:ramadan_app/views/onboarding/onboarding_view.dart';
 export 'package:go_router/go_router.dart' show GoRouter;
 export 'package:flutter/material.dart' show GlobalKey, NavigatorState;
 
@@ -42,6 +43,11 @@ final router = GoRouter(
     GoRoute(
       path: '/splash',
       pageBuilder: (context, state) => NoTransitionPage(child: SplashView()),
+    ),
+    GoRoute(
+      path: '/onboarding',
+      pageBuilder: (context, state) =>
+          const NoTransitionPage(child: OnboardingView()),
     ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
