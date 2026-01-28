@@ -2,7 +2,6 @@ import 'package:adhan/adhan.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
 import 'package:ramadan_app/providers/ramadan/ramadan_provider.dart';
 

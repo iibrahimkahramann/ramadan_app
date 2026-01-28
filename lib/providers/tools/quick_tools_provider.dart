@@ -34,7 +34,7 @@ final quickToolsProvider = Provider<List<QuickTool>>((ref) {
     QuickTool(
       id: 'prayer',
       title: 'Prayer',
-      subtitle: 'To prayer',
+      subtitle: 'To Prayer',
       iconPath: 'assets/icons/pray.png',
       iconColor: Colors.purple,
       backgroundColor: const Color(0xFFF3E5F5),

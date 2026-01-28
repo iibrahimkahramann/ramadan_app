@@ -69,11 +69,11 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     _buildPremiumBanner(context, screenWidth, screenHeight),
 
                     SizedBox(height: screenHeight * 0.03),
-                    _buildSectionHeader(context, 'General', screenWidth),
+                    _buildSectionHeader(context, 'General'.tr(), screenWidth),
                     _buildSettingsTile(
                       context,
                       icon: Icons.star_rate_rounded,
-                      title: 'Rate App',
+                      title: 'Rate App'.tr(),
                       onTap: _rateApp,
                       screenWidth: screenWidth,
                       screenHeight: screenHeight,
@@ -81,7 +81,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     _buildSettingsTile(
                       context,
                       icon: Icons.share_rounded,
-                      title: 'Share',
+                      title: 'Share'.tr(),
                       onTap: _shareApp,
                       screenWidth: screenWidth,
                       screenHeight: screenHeight,
@@ -89,7 +89,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     _buildSettingsTile(
                       context,
                       icon: Icons.mail_outline_rounded,
-                      title: 'Contact / Support',
+                      title: 'Contact / Support'.tr(),
                       onTap: () => _launchUrl(kContactEmail),
                       screenWidth: screenWidth,
                       screenHeight: screenHeight,
@@ -97,11 +97,11 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
 
                     SizedBox(height: screenHeight * 0.03),
 
-                    _buildSectionHeader(context, 'Legal', screenWidth),
+                    _buildSectionHeader(context, 'Legal'.tr(), screenWidth),
                     _buildSettingsTile(
                       context,
                       icon: Icons.privacy_tip_outlined,
-                      title: 'Privacy Policy',
+                      title: 'Privacy Policy'.tr(),
                       onTap: () => _launchUrl(kPrivacyUrl),
                       screenWidth: screenWidth,
                       screenHeight: screenHeight,
@@ -109,7 +109,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     _buildSettingsTile(
                       context,
                       icon: Icons.description_outlined,
-                      title: 'Terms of Use',
+                      title: 'Terms of Use'.tr(),
                       onTap: () => _launchUrl(kTermsUrl),
                       screenWidth: screenWidth,
                       screenHeight: screenHeight,
@@ -129,7 +129,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                     //     ),
                     //   ),
                     // ),
-                    SizedBox(height: screenHeight * 0.02),
+                    // SizedBox(height: screenHeight * 0.02),
                   ],
                 ),
               ),

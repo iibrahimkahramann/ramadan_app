@@ -172,6 +172,9 @@ class NotificationService {
           iOS: const DarwinNotificationDetails(
             sound: 'adhan.mp3',
             presentSound: true,
+            presentAlert: true,
+            presentBadge: true,
+            interruptionLevel: InterruptionLevel.timeSensitive,
           ),
         ),
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
