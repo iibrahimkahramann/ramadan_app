@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:ramadan_app/config/utils/app_tracking.dart';
+import 'package:ramadan_app/providers/premium/premium_provider.dart';
 import 'package:ramadan_app/services/notification_service.dart';
 import 'package:ramadan_app/config/router/router.dart' as app_router;
 import 'package:ramadan_app/config/theme/custom_theme.dart';
@@ -17,31 +19,31 @@ void main() async {
 
   // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  // Future<void> _configureRcsdk() async {
-  // print("Configure Rcsdk *************");
-  // await Purchases.setLogLevel(LogLevel.debug);
-  // PurchasesConfiguration? configuration;
+  Future<void> _configureRcsdk() async {
+    print("Configure Rcsdk *************");
+    await Purchases.setLogLevel(LogLevel.debug);
+    PurchasesConfiguration? configuration;
 
-  // if (Platform.isAndroid) {
-  // configuration = PurchasesConfiguration(
-  // "goog_VfjtToCSVCuJIkTdlrjbZxEvRIv",
-  // );
-  // } else if (Platform.isIOS) {
-  // configuration = PurchasesConfiguration(
-  // "appl_ZfKfSKGHyMdRJyhgnOKLslDMEWT",
-  // );
-  // }
-  // await Purchases.configure(configuration!);
+    if (Platform.isAndroid) {
+      configuration = PurchasesConfiguration(
+        "goog_yNzXTMrhtJGEYCWDSlwjlaDUjmi",
+      );
+    } else if (Platform.isIOS) {
+      configuration = PurchasesConfiguration(
+        "appl_YniRJNSXiwyBvWDAyHLcZdGHWrj",
+      );
+    }
+    await Purchases.configure(configuration!);
 
-  // // if (configuration != null) {
-  // //   await Purchases.configure(configuration);
+    // if (configuration != null) {
+    //   await Purchases.configure(configuration);
 
-  // //   final paywallResult = await RevenueCatUI.presentPaywallIfNeeded("pro");
-  // //   print("paywall result: $paywallResult");
-  // // }
-  // }
+    //   final paywallResult = await RevenueCatUI.presentPaywallIfNeeded("pro");
+    //   print("paywall result: $paywallResult");
+    // }
+  }
 
-  // await _configureRcsdk();
+  await _configureRcsdk();
 
   await EasyLocalization.ensureInitialized();
   runApp(
@@ -82,7 +84,7 @@ class MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
     super.initState();
-    // setupRevenueCatListener(ref);
+    setupRevenueCatListener(ref);
     Platform.isIOS ? appTracking() : nottrack();
   }
 
@@ -105,13 +107,13 @@ class MyAppState extends ConsumerState<MyApp> {
     );
   }
 
-  // void setupRevenueCatListener(WidgetRef ref) {
-  // Purchases.addCustomerInfoUpdateListener((customerInfo) async {
-  // final entitlement = customerInfo.entitlements.all["premium"];
-  // ref
-  // .read(isPremiumProvider.notifier)
-  // .updatePremiumStatus(entitlement?.isActive ?? false);
-  // print("Riverpod ile abone kontrolü: ${entitlement?.isActive ?? false}");
-  // });
-  // }
+  void setupRevenueCatListener(WidgetRef ref) {
+    Purchases.addCustomerInfoUpdateListener((customerInfo) async {
+      final entitlement = customerInfo.entitlements.all["premium"];
+      ref
+          .read(isPremiumProvider.notifier)
+          .updatePremiumStatus(entitlement?.isActive ?? false);
+      print("Riverpod ile abone kontrolü: ${entitlement?.isActive ?? false}");
+    });
+  }
 }

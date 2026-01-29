@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
+import 'package:ramadan_app/providers/premium/premium_provider.dart';
+import 'package:ramadan_app/providers/premium/rc_placement_provider.dart';
 import 'package:ramadan_app/providers/qibla/qibla_provider.dart';
 import 'package:ramadan_app/widgets/qibla/location_permission_warning.dart';
 import 'package:ramadan_app/widgets/qibla/qibla_compass_widget.dart';
@@ -30,7 +32,17 @@ class _QiblaFinderViewState extends ConsumerState<QiblaFinderView> {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
-          onPressed: () => context.pop(),
+          onPressed: () async {
+            final isPremium = ref.read(isPremiumProvider);
+
+            if (context.mounted) {
+              context.pop();
+            }
+
+            if (!isPremium) {
+              await showPaywallWithPlacement('calendar_back', 'premium');
+            }
+          },
         ),
         title: Text(
           'Qibla Finder'.tr(),

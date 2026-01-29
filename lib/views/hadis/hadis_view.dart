@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
 import 'package:ramadan_app/providers/hadith/hadith_provider.dart';
+import 'package:ramadan_app/providers/premium/premium_provider.dart';
+import 'package:ramadan_app/providers/premium/rc_placement_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 class HadisView extends ConsumerWidget {
@@ -28,11 +30,21 @@ class HadisView extends ConsumerWidget {
         centerTitle: true,
         leading: IconButton(
           icon: Icon(
-            Icons.close_rounded,
+            Icons.arrow_back_ios_new,
             color: Colors.black,
             size: screenHeight * 0.03,
           ),
-          onPressed: () => context.pop(),
+          onPressed: () async {
+            final isPremium = ref.read(isPremiumProvider);
+
+            if (context.mounted) {
+              context.pop();
+            }
+
+            if (!isPremium) {
+              await showPaywallWithPlacement('calendar_back', 'premium');
+            }
+          },
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,

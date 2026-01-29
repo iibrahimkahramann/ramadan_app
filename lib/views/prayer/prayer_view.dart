@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
 import 'package:ramadan_app/models/prayer/prayer_step_model.dart';
+import 'package:ramadan_app/providers/premium/premium_provider.dart';
+import 'package:ramadan_app/providers/premium/rc_placement_provider.dart';
 import 'package:ramadan_app/widgets/prayer/prayer_step_card.dart';
 
 class PrayerView extends ConsumerStatefulWidget {
@@ -90,8 +92,18 @@ class _PrayerViewState extends ConsumerState<PrayerView> {
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.close_rounded, color: Colors.black),
-          onPressed: () => context.pop(),
+          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
+          onPressed: () async {
+            final isPremium = ref.read(isPremiumProvider);
+
+            if (context.mounted) {
+              context.pop();
+            }
+
+            if (!isPremium) {
+              await showPaywallWithPlacement('calendar_back', 'premium');
+            }
+          },
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,

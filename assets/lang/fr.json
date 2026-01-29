@@ -104,5 +104,7 @@
     "General": "Général",
     "Legal": "Légal",
     "Prayer Time": "Heure de prière",
-    "It is time for {}": "C'est l'heure de {}"
+    "It is time for {}": "C'est l'heure de {}",
+    "Home": "Accueil",
+    "Settings": "Paramètres"
 }

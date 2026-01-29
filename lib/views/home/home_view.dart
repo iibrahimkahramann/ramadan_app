@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ramadan_app/component/home/imsak_container_component.dart';
 import 'package:ramadan_app/component/home/ramadan_ai_assistans_component.dart';
 import 'package:ramadan_app/component/home/quick_tools_component.dart';
+import 'package:ramadan_app/providers/premium/premium_provider.dart';
+import 'package:ramadan_app/providers/premium/rc_placement_provider.dart';
 import '../../widgets/home/custom_header_background.dart';
 import '../../widgets/home/timer_display_widget.dart';
 
@@ -14,6 +16,24 @@ class HomeView extends ConsumerStatefulWidget {
 }
 
 class _HomeViewState extends ConsumerState<HomeView> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkAndShowPaywall();
+    });
+  }
+
+  Future<void> _checkAndShowPaywall() async {
+    final isPremium = ref.read(isPremiumProvider);
+    final hasShown = ref.read(homePaywallShownProvider);
+
+    if (!isPremium && !hasShown) {
+      ref.read(homePaywallShownProvider.notifier).state = true;
+      await showPaywallWithPlacement('home', 'premium');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;

@@ -1,11 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ramadan_app/providers/premium/rc_placement_provider.dart';
 import 'package:ramadan_app/widgets/home/custom_header_background.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
+import 'package:ramadan_app/providers/premium/premium_provider.dart';
 
 const String kPrivacyUrl =
     'https://sites.google.com/view/ramadan-privacy-polic/ana-sayfa';
@@ -53,6 +55,8 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
     final screenWidth = MediaQuery.of(context).size.width;
     final bgHeight = screenHeight * 0.22;
 
+    final isPremium = ref.watch(isPremiumProvider);
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
@@ -66,7 +70,8 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                 child: Column(
                   children: [
                     SizedBox(height: screenHeight * 0.035),
-                    _buildPremiumBanner(context, screenWidth, screenHeight),
+                    if (!isPremium)
+                      _buildPremiumBanner(context, screenWidth, screenHeight),
 
                     SizedBox(height: screenHeight * 0.03),
                     _buildSectionHeader(context, 'General'.tr(), screenWidth),
@@ -243,7 +248,9 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showPaywallWithPlacement('pro_button', 'premium');
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.amberAccent,
                         foregroundColor: Colors.black87,

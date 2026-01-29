@@ -104,5 +104,7 @@
     "General": "Genel",
     "Legal": "Yasal",
     "Prayer Time": "Namaz Vakti",
-    "It is time for {}": "{} vakti girdi"
+    "It is time for {}": "{} vakti girdi",
+    "Home": "Ana Sayfa",
+    "Settings": "Ayarlar"
 }

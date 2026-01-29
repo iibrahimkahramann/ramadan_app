@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
 import 'package:ramadan_app/providers/ramadan/ramadan_provider.dart';
+import 'package:ramadan_app/providers/premium/premium_provider.dart';
+import 'package:ramadan_app/providers/premium/rc_placement_provider.dart';
 import 'package:ramadan_app/widgets/ramadan_calendar/calendar_header.dart';
 import 'package:ramadan_app/widgets/ramadan_calendar/ramadan_day_card.dart';
 import 'package:ramadan_app/widgets/qibla/location_permission_warning.dart';
@@ -39,7 +41,17 @@ class _RamadanCalendarViewState extends ConsumerState<RamadanCalendarView> {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
-          onPressed: () => context.pop(),
+          onPressed: () async {
+            final isPremium = ref.read(isPremiumProvider);
+
+            if (context.mounted) {
+              context.pop();
+            }
+
+            if (!isPremium) {
+              await showPaywallWithPlacement('calendar_back', 'premium');
+            }
+          },
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
