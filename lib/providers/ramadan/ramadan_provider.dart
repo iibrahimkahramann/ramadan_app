@@ -75,6 +75,7 @@ class RamadanNotifier extends Notifier<RamadanState> {
 
       // Reverse Geocoding to get District/City
       String? locationName;
+      String? countryCode;
       try {
         final placemarks = await placemarkFromCoordinates(
           position.latitude,
@@ -82,6 +83,7 @@ class RamadanNotifier extends Notifier<RamadanState> {
         );
         if (placemarks.isNotEmpty) {
           final place = placemarks.first;
+          countryCode = place.isoCountryCode;
           // Prioritize District (subAdministrativeArea) -> City (locality) -> Province (administrativeArea)
           locationName =
               place.subAdministrativeArea ??
@@ -111,13 +113,15 @@ class RamadanNotifier extends Notifier<RamadanState> {
         // Force Istanbul
         coordinates = Coordinates(41.0082, 28.9784);
         locationName = "İstanbul (Simülatör)";
+        countryCode = "TR";
       } else {
         coordinates = Coordinates(position.latitude, position.longitude);
       }
 
-      // Calculation parameters
-      final params = CalculationMethod.turkey.getParameters();
-      params.madhab = Madhab.hanafi;
+      // Determine Calculation Method based on Country
+      final calculationMethod = _getCalculationMethod(countryCode);
+      final params = calculationMethod.getParameters();
+      params.madhab = Madhab.shafi;
 
       // 1. Calculate Today & Tomorrow (for Home Screen)
       final now = DateTime.now();
@@ -170,6 +174,43 @@ class RamadanNotifier extends Notifier<RamadanState> {
       ]);
     } catch (e) {
       state = state.copyWith(isLoading: false, hasPermission: false);
+    }
+  }
+
+  CalculationMethod _getCalculationMethod(String? countryCode) {
+    if (countryCode == null) return CalculationMethod.muslim_world_league;
+
+    switch (countryCode.toUpperCase()) {
+      case 'TR': // Turkey
+      case 'DE': // Germany
+      case 'AT': // Austria
+      case 'NL': // Netherlands
+      case 'BE': // Belgium
+        return CalculationMethod.turkey;
+      case 'SA': // Saudi Arabia
+        return CalculationMethod.umm_al_qura;
+      case 'EG': // Egypt
+        return CalculationMethod.egyptian;
+      case 'PK': // Pakistan
+      case 'IN': // India
+      case 'BD': // Bangladesh
+      case 'AF': // Afghanistan
+        return CalculationMethod.karachi;
+      case 'US': // USA
+      case 'CA': // Canada
+        return CalculationMethod.north_america;
+      case 'IR': // Iran
+        return CalculationMethod.tehran;
+      case 'AE': // UAE
+      case 'QA': // Qatar
+      case 'KW': // Kuwait
+      case 'BH': // Bahrain
+      case 'OM': // Oman
+        return CalculationMethod.dubai;
+      case 'SG': // Singapore
+        return CalculationMethod.singapore;
+      default:
+        return CalculationMethod.muslim_world_league;
     }
   }
 }
