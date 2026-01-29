@@ -5,7 +5,6 @@ import 'package:ramadan_app/providers/premium/rc_placement_provider.dart';
 import 'package:ramadan_app/widgets/home/custom_header_background.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:in_app_review/in_app_review.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:ramadan_app/config/theme/custom_theme.dart';
 import 'package:ramadan_app/providers/premium/premium_provider.dart';
 
@@ -42,12 +41,12 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
     } else {}
   }
 
-  Future<void> _shareApp() async {
-    // ignore: deprecated_member_use
-    await Share.share(
-      'Check out this amazing Ramadan App! https://apps.apple.com/app/id...',
-    );
-  }
+  // Future<void> _shareApp() async {
+  //   // ignore: deprecated_member_use
+  //   await Share.share(
+  //     'Check out this amazing Ramadan App! https://apps.apple.com/app/id...',
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -80,14 +79,6 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
                       icon: Icons.star_rate_rounded,
                       title: 'Rate App'.tr(),
                       onTap: _rateApp,
-                      screenWidth: screenWidth,
-                      screenHeight: screenHeight,
-                    ),
-                    _buildSettingsTile(
-                      context,
-                      icon: Icons.share_rounded,
-                      title: 'Share'.tr(),
-                      onTap: _shareApp,
                       screenWidth: screenWidth,
                       screenHeight: screenHeight,
                     ),

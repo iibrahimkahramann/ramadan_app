@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "550245774863",
+    "project_id": "ramadan2026",
+    "storage_bucket": "ramadan2026.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550245774863:android:93e5fb86d7a5f76dccd57a",
+        "android_client_info": {
+          "package_name": "com.imsakiye.ramadan_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmJSAC4oQBxkVb8_-5MQ2sAh0RFFdVUdE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

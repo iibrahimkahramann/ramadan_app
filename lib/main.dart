@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:ramadan_app/config/utils/app_tracking.dart';
+import 'package:ramadan_app/firebase_options.dart';
 import 'package:ramadan_app/providers/premium/premium_provider.dart';
 import 'package:ramadan_app/services/notification_service.dart';
 import 'package:ramadan_app/config/router/router.dart' as app_router;
@@ -17,7 +19,7 @@ void main() async {
   await notificationService.initialize();
   await notificationService.requestPermissions();
 
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   Future<void> _configureRcsdk() async {
     print("Configure Rcsdk *************");
