@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:ramadan_app/providers/premium/rc_placement_provider.dart';
+
 import 'package:ramadan_app/providers/ramadan/ramadan_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -458,10 +458,7 @@ class _OnboardingViewState extends ConsumerState<OnboardingView> {
     await prefs.setBool('onboarding_completed', true);
 
     if (mounted) {
-      await showPaywallWithPlacement('first_open', 'premium');
-      if (mounted) {
-        context.go('/home');
-      }
+      context.go('/home');
     }
   }
 }

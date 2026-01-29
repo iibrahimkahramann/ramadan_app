@@ -5,6 +5,24 @@ import '../../models/tools/quick_tool_model.dart';
 final quickToolsProvider = Provider<List<QuickTool>>((ref) {
   return [
     QuickTool(
+      id: 'ablution',
+      title: 'Ablution',
+      subtitle: 'How to Perform Ablution?',
+      iconPath: 'assets/icons/ablution.png',
+      iconColor: Colors.purple,
+      backgroundColor: const Color(0xFFF3E5F5),
+      routePath: '/ablution',
+    ),
+    QuickTool(
+      id: 'prayer',
+      title: 'Prayer',
+      subtitle: 'To Prayer',
+      iconPath: 'assets/icons/pray.png',
+      iconColor: Colors.purple,
+      backgroundColor: const Color(0xFFF3E5F5),
+      routePath: '/prayer',
+    ),
+    QuickTool(
       id: 'qibla',
       title: 'Qibla Finder',
       subtitle: 'Locate direction',
@@ -31,15 +49,7 @@ final quickToolsProvider = Provider<List<QuickTool>>((ref) {
       backgroundColor: const Color(0xFFE3F2FD),
       routePath: '/ramadan-calendar',
     ),
-    QuickTool(
-      id: 'prayer',
-      title: 'Prayer',
-      subtitle: 'To Prayer',
-      iconPath: 'assets/icons/pray.png',
-      iconColor: Colors.purple,
-      backgroundColor: const Color(0xFFF3E5F5),
-      routePath: '/prayer',
-    ),
+
     QuickTool(
       id: 'hadis',
       title: 'Hadith',
@@ -48,15 +58,6 @@ final quickToolsProvider = Provider<List<QuickTool>>((ref) {
       iconColor: Colors.purple,
       backgroundColor: const Color(0xFFF3E5F5),
       routePath: '/hadis',
-    ),
-    QuickTool(
-      id: 'ablution',
-      title: 'Ablution',
-      subtitle: 'How to Perform Ablution?',
-      iconPath: 'assets/icons/ablution.png',
-      iconColor: Colors.purple,
-      backgroundColor: const Color(0xFFF3E5F5),
-      routePath: '/ablution',
     ),
   ];
 });

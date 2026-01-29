@@ -10,6 +10,9 @@
         android:label="Ramadan 2026"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7069767836666175~6471929918"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

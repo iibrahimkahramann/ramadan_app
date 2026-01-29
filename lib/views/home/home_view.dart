@@ -5,6 +5,7 @@ import 'package:ramadan_app/component/home/ramadan_ai_assistans_component.dart';
 import 'package:ramadan_app/component/home/quick_tools_component.dart';
 import 'package:ramadan_app/providers/premium/premium_provider.dart';
 import 'package:ramadan_app/providers/premium/rc_placement_provider.dart';
+import 'package:ramadan_app/providers/ads/interstitial_ad_provider.dart';
 import '../../widgets/home/custom_header_background.dart';
 import '../../widgets/home/timer_display_widget.dart';
 
@@ -30,7 +31,18 @@ class _HomeViewState extends ConsumerState<HomeView> {
 
     if (!isPremium && !hasShown) {
       ref.read(homePaywallShownProvider.notifier).state = true;
-      await showPaywallWithPlacement('home', 'premium');
+
+      // Chain: Show Ad -> Ad Dismissed -> Show Paywall
+      ref
+          .read(interstitialAdProvider.notifier)
+          .showAd(
+            onAdDismissed: () async {
+              // Check mounted to be safe after ad closes
+              if (mounted) {
+                await showPaywallWithPlacement('home', 'premium');
+              }
+            },
+          );
     }
   }
 

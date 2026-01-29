@@ -31,53 +31,60 @@ class NavBar extends ConsumerWidget {
     return Scaffold(
       extendBody: true, // Important for glass effect
       body: child,
-      bottomNavigationBar: Container(
-        margin: EdgeInsets.only(
-          bottom: width * 0.08, // Lift from bottom
-          left: width * 0.15,
-          right: width * 0.15,
-        ),
-        height: width * 0.16,
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.8), // Glass-like background
-          borderRadius: BorderRadius.circular(width * 0.1),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.1),
-              blurRadius: 20,
-              offset: const Offset(0, 10),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            margin: EdgeInsets.only(
+              bottom: width * 0.08, // Lift from bottom
+              left: width * 0.15,
+              right: width * 0.15,
             ),
-          ],
-          border: Border.all(
-            color: Colors.white.withValues(alpha: 0.6),
-            width: 1.5,
-          ),
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(width * 0.1),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildNavItem(
-                  context,
-                  icon: Icons.mosque_outlined, // More thematic icon
-                  label: 'Home'.tr(),
-                  isSelected: selectedIndex == 0,
-                  onTap: () => onTap(0),
-                ),
-                _buildNavItem(
-                  context,
-                  icon: Icons.settings_outlined,
-                  label: 'Settings'.tr(),
-                  isSelected: selectedIndex == 1,
-                  onTap: () => onTap(1),
+            height: width * 0.16,
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(
+                alpha: 0.8,
+              ), // Glass-like background
+              borderRadius: BorderRadius.circular(width * 0.1),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.1),
+                  blurRadius: 20,
+                  offset: const Offset(0, 10),
                 ),
               ],
+              border: Border.all(
+                color: Colors.white.withValues(alpha: 0.6),
+                width: 1.5,
+              ),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(width * 0.1),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _buildNavItem(
+                      context,
+                      icon: Icons.mosque_outlined, // More thematic icon
+                      label: 'Home'.tr(),
+                      isSelected: selectedIndex == 0,
+                      onTap: () => onTap(0),
+                    ),
+                    _buildNavItem(
+                      context,
+                      icon: Icons.settings_outlined,
+                      label: 'Settings'.tr(),
+                      isSelected: selectedIndex == 1,
+                      onTap: () => onTap(1),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
