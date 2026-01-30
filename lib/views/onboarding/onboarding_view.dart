@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:ramadan_app/providers/ramadan/ramadan_provider.dart';
+import 'package:ramadan_app/services/notification_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingView extends ConsumerStatefulWidget {
@@ -57,10 +58,16 @@ class _OnboardingViewState extends ConsumerState<OnboardingView> {
           PageView(
             physics: const NeverScrollableScrollPhysics(),
             controller: _pageController,
-            onPageChanged: (index) {
+            onPageChanged: (index) async {
               setState(() {
                 _currentPage = index;
               });
+
+              // Automatically request notification permission when reaching screen 3 (index 2)
+              if (index == 2) {
+                print("DEBUG: Requesting Notification Permissions on Page 2");
+                await NotificationService().requestPermissions();
+              }
             },
             children: [
               _buildWelcomePage(context),
@@ -433,9 +440,8 @@ class _OnboardingViewState extends ConsumerState<OnboardingView> {
         // Move to next
         await _nextPage();
       } else if (_currentPage == 2) {
-        // Request Notification
-        await Permission.notification.request();
-        // Finish
+        // Notification permission is already requested on page entry.
+        // Just finish.
         await _completeOnboarding();
       }
     } finally {

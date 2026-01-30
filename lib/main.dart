@@ -18,7 +18,7 @@ void main() async {
 
   final notificationService = NotificationService();
   await notificationService.initialize();
-  await notificationService.requestPermissions();
+  // await notificationService.requestPermissions(); // Moved to Onboarding
   await MobileAds.instance.initialize();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -101,7 +101,7 @@ class MyAppState extends ConsumerState<MyApp> {
     }
 
     return MaterialApp.router(
-      title: 'Subscription Managment',
+      title: 'Ramadan 2026',
       debugShowCheckedModeBanner: false,
       theme: CustomTheme.themeData(context),
       routerConfig: app_router.router,

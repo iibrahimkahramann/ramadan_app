@@ -32,17 +32,51 @@ class _HomeViewState extends ConsumerState<HomeView> {
     if (!isPremium && !hasShown) {
       ref.read(homePaywallShownProvider.notifier).state = true;
 
+      // Ensure ad load is started
+      ref.read(interstitialAdProvider.notifier).loadAd();
+
+      // Wait for ad to load (max 4 seconds)
+      int retries = 0;
+      bool hasRetried = false;
+
+      while (retries < 8) {
+        final adState = ref.read(interstitialAdProvider);
+
+        if (adState.isLoaded) {
+          break; // Ready to show
+        }
+
+        if (adState.loadError) {
+          if (!hasRetried) {
+            // Retry once
+            hasRetried = true;
+            ref.read(interstitialAdProvider.notifier).loadAd();
+            // Continue waiting
+          } else {
+            break; // Failed twice, give up
+          }
+        }
+
+        await Future.delayed(const Duration(milliseconds: 500));
+        retries++;
+      }
+
       // Chain: Show Ad -> Ad Dismissed -> Show Paywall
-      ref
-          .read(interstitialAdProvider.notifier)
-          .showAd(
-            onAdDismissed: () async {
-              // Check mounted to be safe after ad closes
-              if (mounted) {
-                await showPaywallWithPlacement('home', 'premium');
-              }
-            },
-          );
+      // Re-check premium status in case it updated during the wait
+      if (!ref.read(isPremiumProvider)) {
+        if (mounted) {
+          ref
+              .read(interstitialAdProvider.notifier)
+              .showAd(
+                onAdDismissed: () async {
+                  // Check mounted to be safe after ad closes
+                  if (mounted) {
+                    await showPaywallWithPlacement('home', 'premium');
+                  }
+                },
+              );
+        }
+      }
     }
   }
 

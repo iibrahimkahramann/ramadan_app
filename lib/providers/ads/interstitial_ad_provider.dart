@@ -6,16 +6,27 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 class InterstitialAdState {
   final InterstitialAd? interstitialAd;
   final bool isLoaded;
+  final bool isLoading;
+  final bool loadError;
 
-  InterstitialAdState({this.interstitialAd, this.isLoaded = false});
+  InterstitialAdState({
+    this.interstitialAd,
+    this.isLoaded = false,
+    this.isLoading = false,
+    this.loadError = false,
+  });
 
   InterstitialAdState copyWith({
     InterstitialAd? interstitialAd,
     bool? isLoaded,
+    bool? isLoading,
+    bool? loadError,
   }) {
     return InterstitialAdState(
       interstitialAd: interstitialAd ?? this.interstitialAd,
       isLoaded: isLoaded ?? this.isLoaded,
+      isLoading: isLoading ?? this.isLoading,
+      loadError: loadError ?? this.loadError,
     );
   }
 }
@@ -26,7 +37,10 @@ class InterstitialAdNotifier extends StateNotifier<InterstitialAdState> {
   }
 
   Future<void> loadAd() async {
-    if (state.isLoaded || state.interstitialAd != null) return;
+    if (state.isLoaded || state.interstitialAd != null || state.isLoading)
+      return;
+
+    state = state.copyWith(isLoading: true, loadError: false);
 
     final String adUnitId = Platform.isAndroid
         ? 'ca-app-pub-7069767836666175/5967359423'
@@ -38,12 +52,20 @@ class InterstitialAdNotifier extends StateNotifier<InterstitialAdState> {
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
           if (!mounted) return;
-          state = state.copyWith(interstitialAd: ad, isLoaded: true);
+          state = state.copyWith(
+            interstitialAd: ad,
+            isLoaded: true,
+            isLoading: false,
+          );
         },
         onAdFailedToLoad: (err) {
           print('Failed to load an interstitial ad: ${err.message}');
           if (!mounted) return;
-          state = state.copyWith(isLoaded: false);
+          state = state.copyWith(
+            isLoaded: false,
+            isLoading: false,
+            loadError: true,
+          );
         },
       ),
     );
