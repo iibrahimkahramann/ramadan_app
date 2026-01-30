@@ -197,8 +197,8 @@ class NotificationService {
     try {
       await flutterLocalNotificationsPlugin.show(
         id: 888,
-        title: 'Ezan Testi',
-        body: 'Ezan sesi çalıyor mu?',
+        title: 'Prayer Time',
+        body: 'The call to midday prayer is being made.',
         notificationDetails: NotificationDetails(
           android: AndroidNotificationDetails(
             'prayer_channel',
